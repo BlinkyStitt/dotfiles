@@ -1,0 +1,21 @@
+import os
+import shutil
+import sys
+
+
+src = sys.path[0] + '/src'
+home = os.getenv("HOME")
+
+for file in os.listdir(src):
+    source = src + '/' + file
+    destination = home + '/.' + file
+
+    print "linking %s to %s" % (source, destination)
+
+    if os.path.islink(destination) or os.path.isfile(destination):
+        os.unlink(destination)
+    elif os.path.isdir(destination):
+        shutil.rmtree(destination)
+
+    os.symlink(source, destination)
+

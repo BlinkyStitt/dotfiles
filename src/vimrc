@@ -1,0 +1,30 @@
+" based on https://github.com/jferris/config_files/blob/master/vimrc
+set encoding=utf-8
+set fileencoding=utf-8
+scriptencoding utf-8
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" Switch wrap on for everything
+set wrap
+
+" Softtabs, 4 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Always display the status line
+set laststatus=2
+
+" Local config
+if filereadable(".vimrc.local")
+  source .vimrc.local
+endif
+
+" better statusline
+set statusline=%<%F%m%r%h%w\ %h%m%r%=%-14.(%l,%c%V%)\ %P
