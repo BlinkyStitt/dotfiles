@@ -1,3 +1,10 @@
+# save the default path so we can easily reload without duplicating anything
+if [ ! -n "$ORIG_PATH" ]; then
+  export ORIG_PATH=$PATH
+else
+  PATH=$ORIG_PATH
+fi
+
 # macports
 if [ -d /opt/local/sbin ]; then
         PATH=/opt/local/sbin:$PATH
