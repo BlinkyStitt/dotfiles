@@ -19,17 +19,21 @@ if [ -d /sw ]; then
 fi
 
 # homebrew
-if [ -d ${HOME}/.homebrew/bin ]; then
-  PATH=${HOME}/.homebrew/bin:${PATH}
-fi
-if [ -d ${HOME}/.homebrew/sbin ]; then
-  PATH=${HOME}/.homebrew/sbin:${PATH}
-fi
-if [ -d /usr/local/bin ]; then
-  PATH=/usr/local/bin:${PATH}
-fi
-if [ -d /usr/local/sbin ]; then
-  PATH=/usr/local/sbin:${PATH}
+if command_exists brew; then
+  BREW_PATH=`brew --prefix`
+  # TODO: make sure brew is in /usr/local since it's a pain otherwise
+
+  if [ -d ${BREW_PATH}/bin ]; then
+    # eventhough this is already on the path, we need to make it
+    # higher in priority    
+    PATH=${BREW_PATH}/bin:${PATH}
+  fi
+  if [ -d ${BREW_PATH}/sbin ]; then
+    PATH=${BREW_PATH}/sbin:${PATH}
+  fi
+  if [ -d ${BREW_PATH}/share/python ]; then
+    PATH=${BREW_PATH}/share/python:${PATH}
+  fi
 fi
 
 # ccache
