@@ -34,6 +34,9 @@ if command_exists brew; then
   if [ -d ${BREW_PATH}/share/python ]; then
     PATH=${BREW_PATH}/share/python:${PATH}
   fi
+  if [ -d ${BREW_PATH}/lib/node_modules ]; then
+    export NODE_PATH=${BREW_PATH}/lib/node_modules
+  fi
 fi
 
 # ccache
