@@ -16,4 +16,7 @@ _argh_completion()
                    COMP_CWORD=$COMP_CWORD \
                    ARGH_AUTO_COMPLETE=1 $1 ) )
 }
-complete -F _argh_completion flask-base
+
+if command_exists flask-base; then
+    complete -F _argh_completion flask-base
+fi
