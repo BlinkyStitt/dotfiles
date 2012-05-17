@@ -20,5 +20,8 @@ for file in os.listdir(src):
 
     os.symlink(source, destination)
 
-    # todo: create ~/.gitconfig
+# todo: create ~/.gitconfig
+
+print 'SUCCESS!'
+print 'You should run ". ~/.bashrc"'
 
