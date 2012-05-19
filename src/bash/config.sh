@@ -67,3 +67,6 @@ if command_exists brew; then
     export PYTHONPATH=`brew --prefix`/lib/python2.7/site-packages:$PYTHONPATH
   fi
 fi
+
+# virtualenv
+export VIRTUALENV_USE_DISTRIBUTE=1
