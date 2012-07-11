@@ -57,16 +57,6 @@ if [ -f ${HOME}/.rvm/scripts/rvm ]; then
     source ${HOME}/.rvm/scripts/rvm
 fi
 
-# add brew's python to the path
-if command_exists python; then
-    if command_exists brew; then
-        POSSIBLE_PYTHON=`brew --prefix`/share/python
-        if [ -d ${POSSIBLE_PYTHON} ]; then
-            PATH=${POSSIBLE_PYTHON}:${PATH}
-        fi
-    fi
-fi
-
 # add users bin folder to the path
 if [ -d ${HOME}/.bin ]; then
     PATH=${HOME}/.bin:$PATH
