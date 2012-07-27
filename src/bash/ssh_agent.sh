@@ -1,12 +1,15 @@
 SSH_ENV="$HOME/.ssh/environment"
 
+# todo: check for ssh-agent in /opt
+SSH_AGENT_BIN="/usr/bin/ssh-agent"
+SSH_ADD_BIN="/usr/bin/ssh-add"
+
 function start_agent {
      echo "Initialising new SSH agent..."
-     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-     echo succeeded
+     $SSH_AGENT_BIN | sed 's/^echo/#echo/' > "${SSH_ENV}"
      chmod 600 "${SSH_ENV}"
      . "${SSH_ENV}" > /dev/null
-     /usr/bin/ssh-add;
+     $SSH_ADD_BIN;
 }
 
 # Source SSH settings, if applicable
