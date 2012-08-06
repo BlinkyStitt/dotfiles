@@ -37,6 +37,12 @@ if command_exists brew; then
   if [ -d ${BREW_PATH}/lib/node_modules ]; then
     export NODE_PATH=${BREW_PATH}/lib/node_modules
   fi
+
+  # mysql
+  if [ -d "${BREW_PATH}/mysql" ]; then
+    PATH="$PATH:${BREW_PATH}/mysql/bin"
+    export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:${BREW_PATH}/mysql/lib"
+  fi
 fi
 
 # ccache
