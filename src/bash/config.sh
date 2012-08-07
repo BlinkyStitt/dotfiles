@@ -70,3 +70,7 @@ shopt -s autocd checkjobs globstar > /dev/null 2>&1
 
 # virtualenv
 export VIRTUALENV_USE_DISTRIBUTE=1
+
+# this is where your own code goes
+# todo: 
+export CODE_HOME="$HOME/code"
