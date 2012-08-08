@@ -1,4 +1,4 @@
-# save the default path so we can easily reload without duplicating anything
+# save some variables so we can safely reload without duplicating anything
 if [ -z "${ORIG_PATH}" ]; then
   export ORIG_PATH=${PATH}
 else
