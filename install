@@ -11,11 +11,13 @@ for file in os.listdir(src):
     source = src + '/' + file
     destination = home + '/.' + file
 
-    print "linking %s to %s" % (source, destination)
+    print "linking %s to %s..." % (source, destination)
 
     if os.path.islink(destination) or os.path.isfile(destination):
-        os.unlink(destination)
+        print "notice: removing existing file at %s..." % destination
+        os.remove(destination)
     elif os.path.isdir(destination):
+        print "notice: removing existing directory at %s..." % destination
         shutil.rmtree(destination)
 
     os.symlink(source, destination)
@@ -24,4 +26,3 @@ for file in os.listdir(src):
 
 print 'SUCCESS!'
 print 'You should run ". ~/.bashrc"'
-

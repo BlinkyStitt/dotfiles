@@ -54,23 +54,9 @@ set -o vi
 # vim as EDITOR
 export EDITOR=vim
 
-# set pip cache folder
-export PIP_DOWNLOAD_CACHE=~/.pip/cache
-
 # bash 4 options
-#@todo need to make this only run on bash 4 instead of sending to /dev/null
+# todo: need to make this only run on bash 4 instead of sending to /dev/null
 shopt -s autocd checkjobs globstar > /dev/null 2>&1
 
-# python
-#if command_exists brew; then
-#  if [ -d "`brew --prefix`/lib/python2.7/site-packages" ]; then
-#    export PYTHONPATH=`brew --prefix`/lib/python2.7/site-packages:$PYTHONPATH
-#  fi
-#fi
-
-# virtualenv
-export VIRTUALENV_USE_DISTRIBUTE=1
-
 # this is where your own code goes
-# todo: 
 export CODE_HOME="$HOME/code"

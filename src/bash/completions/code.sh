@@ -1,15 +1,13 @@
-#!/bin/sh
-
-# cd into the Uber directory ("cd -" friendly)
+# cd into the code directory
 c() {
-    if [[ $1 == "" ]]; then
+    if [ -z $1 ]; then
         cd $CODE_HOME
         return
     fi
 
-    local thedir=$(ls $CODE_HOME | grep $1 | sort | tail -1)
-    if [[ $thedir != "" ]]; then
-        cd $CODE_HOME/$thedir
+    local project=$(ls $CODE_HOME | grep $1 | sort | tail -1)
+    if [ -n $project ]; then
+        cd $CODE_HOME/$project
     fi
 }
 _c() {
@@ -17,4 +15,3 @@ _c() {
     return 0;
 }
 complete -o default -o nospace -F _c c
-

@@ -1,15 +1,13 @@
-#!/bin/sh
-
-# cd into the Uber directory ("cd -" friendly)
+# cd into UBER_HOME
 u() {
-    if [[ $1 == "" ]]; then
+    if [ -z $1 ]; then
         cd $UBER_HOME
         return
     fi
 
-    local uber=$(ls $UBER_HOME | grep $1 | sort | tail -1)
-    if [[ $uber != "" ]]; then
-        cd $UBER_HOME/$uber
+    local project=$(ls $UBER_HOME | grep $1 | sort | tail -1)
+    if [ -n $project ]; then
+        cd $UBER_HOME/$project
     fi
 }
 _uber() {

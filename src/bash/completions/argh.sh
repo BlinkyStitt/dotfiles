@@ -10,6 +10,9 @@
 #
 # ...where PROG should be your script name (e.g. "manage.py").
 #
+# note: if the script relies on a virtualenv, the tab completion will likely 
+#       be broken unless you are in that environment
+#
 _argh_completion()
 {
     COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
