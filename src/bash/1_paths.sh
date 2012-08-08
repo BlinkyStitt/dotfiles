@@ -5,27 +5,27 @@ else
   PATH=${ORIG_PATH}
 fi
 if [ -z "${ORIG_DYLD_LIBRARY_PATH}" ]; then
-  export ORIG_DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}
+  export ORIG_DYLD_LIBRARY_PATH="${DYLD_LIBRARY_PATH}"
 else
-  DYLD_LIBRARY_PATH=${ORIG_DYLD_LIBRARY_PATH}
+  DYLD_LIBRARY_PATH="${ORIG_DYLD_LIBRARY_PATH}"
 fi
 if [ -z "${ORIG_PYTHONPATH}" ]; then
-  export ORIG_PYTHONPATH=${PYTHONPATH}
+  export ORIG_PYTHONPATH="${PYTHONPATH}"
 else
-  PYTHONPATH=${ORIG_PYTHONPATH}
+  PYTHONPATH="${ORIG_PYTHONPATH}"
 fi
 
 # macports
 if [ -d "/opt/local/sbin" ]; then
-        PATH="/opt/local/sbin:${PATH}"
+  PATH="/opt/local/sbin:${PATH}"
 fi
 if [ -d "/opt/local/bin" ]; then
-        PATH="/opt/local/bin:${PATH}"
+  PATH="/opt/local/bin:${PATH}"
 fi
 
 # fink
 if [ -d "/sw" ]; then
-        PATH="/sw/bin:${PATH}"
+  PATH="/sw/bin:${PATH}"
 fi
 
 # homebrew
@@ -72,15 +72,15 @@ fi
 
 # rvm
 if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
-    source "${HOME}/.rvm/scripts/rvm"
+  source "${HOME}/.rvm/scripts/rvm"
 fi
 
 # add the user's bin folder to the path
 if [ -d "${HOME}/.bin" ]; then
-    PATH="${HOME}/.bin:$PATH"
+  PATH="${HOME}/.bin:$PATH"
 fi
 if [ -d "${HOME}/bin" ]; then
-    PATH="${HOME}/bin:$PATH"
+  PATH="${HOME}/bin:$PATH"
 fi
 
 # local settings

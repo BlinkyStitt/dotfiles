@@ -1,3 +1,4 @@
 #export UBER_HOME="/Users/`whoami`/Uber"
-export UBER_HOME="$HOME/Uber"
-
+if [ -d "${HOME}/Uber" ]; then
+    export UBER_HOME="$HOME/Uber"
+fi
