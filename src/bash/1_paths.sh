@@ -9,6 +9,11 @@ if [ -z "${ORIG_DYLD_LIBRARY_PATH}" ]; then
 else
   DYLD_LIBRARY_PATH="${ORIG_DYLD_LIBRARY_PATH}"
 fi
+if [ -z "${ORIG_NODE_PATH}" ]; then
+  export ORIG_NODE_PATH="${NODE_PATH}"
+else
+  NODE_PATH="${ORIG_NODE_PATH}"
+fi
 if [ -z "${ORIG_PYTHONPATH}" ]; then
   export ORIG_PYTHONPATH="${PYTHONPATH}"
 else
@@ -45,7 +50,7 @@ if command_exists brew; then
     PATH="${BREW_PATH}/share/python:${PATH}"
   fi
   if [ -d "${BREW_PATH}/lib/node_modules" ]; then
-    export "NODE_PATH=${BREW_PATH}/lib/node_modules"
+    export NODE_PATH="${BREW_PATH}/lib/node_modules"
   fi
 
   # mysql
