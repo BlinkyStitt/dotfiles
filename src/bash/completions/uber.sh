@@ -1,6 +1,4 @@
 if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
-    echo ${UBER_HOME}
-
     # cd into UBER_HOME
     # todo: this is copy/pasted from ./code.sh, don't do that!
     u() {
