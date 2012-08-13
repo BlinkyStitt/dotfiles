@@ -12,4 +12,4 @@ _fab_completion()
         return 1
     fi
 }
-complete -F _fab_completion fab
+complete -o nospace -F _fab_completion fab
