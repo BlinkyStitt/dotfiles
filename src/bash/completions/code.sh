@@ -8,9 +8,12 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
         fi
 
         local PROJECT=$(ls ${CODE_HOME} | grep $1 | sort | tail -1)
-        if [ -n $PROJECT ]; then
-            cd ${CODE_HOME}/$PROJECT
+        if [ -z $PROJECT ]; then
+            echo "$1: No such project"
+            return
         fi
+
+        cd ${CODE_HOME}/$PROJECT
     }
     _c() {
         COMPREPLY=($(compgen -W '$(ls ${CODE_HOME})' -- ${COMP_WORDS[COMP_CWORD]}))
