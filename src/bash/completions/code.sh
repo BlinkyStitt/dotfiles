@@ -13,6 +13,7 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
         fi
 
         cd ${CODE_HOME}/$1
+        pwd
     }
     _c() {
         COMPREPLY=($(compgen -W '$(ls ${CODE_HOME})' -- ${COMP_WORDS[COMP_CWORD]}))
