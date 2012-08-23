@@ -7,13 +7,12 @@ if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
             return
         fi
 
-        local PROJECT=$(ls ${UBER_HOME} | grep $1 | sort | tail -1)
-        if [ -z $PROJECT ]; then
+        if [ ! -d ${UBER_HOME}/$1 ]; then
             echo "$1: No such project"
             return
         fi
 
-        cd ${UBER_HOME}/$PROJECT
+        cd ${UBER_HOME}/$1
     }
     _uber() {
         COMPREPLY=($(compgen -W '$(ls ${UBER_HOME})' -- ${COMP_WORDS[COMP_CWORD]}))
