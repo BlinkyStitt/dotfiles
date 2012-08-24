@@ -13,7 +13,7 @@ if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
         fi
 
         cd ${UBER_HOME}/$1
-        pwd
+        echo "cd `pwd`"
     }
     _uber() {
         COMPREPLY=($(compgen -W '$(ls ${UBER_HOME})' -- ${COMP_WORDS[COMP_CWORD]}))
