@@ -3,7 +3,7 @@ alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 
 alias ls='ls -hF'
 
-if [[ `uname` == 'Darwin' ]]; then
+if shell_is_osx; then
     # Get rid of those pesky .DS_Store files recursively
     alias dsstore-clean='find . -type f -name .DS_Store -print0 | xargs -0 rm'
 

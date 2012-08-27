@@ -10,5 +10,5 @@ done
 
 # use .localrc for settings specific to one system
 if [ -r ~/.bashrc.local ]; then
-  source ~/.bashrc.local
+    source ~/.bashrc.local
 fi

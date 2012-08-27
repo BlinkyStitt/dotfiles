@@ -59,4 +59,6 @@ export EDITOR=vim
 shopt -s autocd checkjobs globstar > /dev/null 2>&1
 
 # this is where your own code goes
-export CODE_HOME="$HOME/code"
+if [ -d "$HOME/code" ]; then
+    export CODE_HOME="$HOME/code"
+fi
