@@ -17,8 +17,10 @@ EXPORT_FUNCTIONS=true
 # Code
 # ----
 
-# Avoid recursive invocation
+# don't do anything if this isn't bash
+[ -z "$BASH_VERSION" ] && return
 
+# Avoid recursive invocation
 [ -n "$BASHRC_DISPATCH_PID" ] && [ $$ -eq "$BASHRC_DISPATCH_PID" ] && return
 BASHRC_DISPATCH_PID=$$
 
