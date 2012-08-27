@@ -22,7 +22,6 @@ EXPORT_FUNCTIONS=true
 [ -n "$BASHRC_DISPATCH_PID" ] && [ $$ -eq "$BASHRC_DISPATCH_PID" ] && return
 BASHRC_DISPATCH_PID=$$
 
-
 # Setup the main shell variables and functions
 
 if [ -z "$SHELL_PLATFORM" ]; then
@@ -42,11 +41,9 @@ if ! type -p shell_is_login ; then
   shell_is_script      () { ! shell_is_interactive ; }
 fi
 
-
 # Make $BASH_ENV the same in interactive and non-interactive scripts
 
 [ -z "$BASH_ENV" ] && export BASH_ENV="$BASH_SOURCE"
-
 
 # Make these available to the potentially convoluted bashrc_* startup scripts
 
@@ -59,6 +56,60 @@ if $EXPORT_FUNCTIONS ; then
     export -f shell_is_script
 fi
 
+# Now dispatch special files
+
+# once
+if [ -z "$BRCD_RANONCE" ]; then
+    for i in ~/.bash/once/*.sh ; do
+        if [ -r "$i" ]; then
+            if shell_is_interactive; then
+                . $i
+            else
+                . $i >/dev/null 2>&1
+            fi
+        fi
+    done
+    export BRCD_RANONCE=true
+fi
+
+# all
+for i in ~/.bash/all/*.sh ; do
+    if [ -r "$i" ]; then
+        if shell_is_interactive; then
+            . $i
+        else
+            . $i >/dev/null 2>&1
+        fi
+    fi
+done
+
+# script
+if shell_is_script; then
+    for i in ~/.bash/script/*.sh ; do
+        if [ -r "$i" ]; then
+            . $i
+        fi
+    done
+fi
+
+# interactive
+if shell_is_interactive; then
+    for i in ~/.bash/interactive/*.sh ; do
+        if [ -r "$i" ]; then
+            . $i
+        fi
+    done
+fi
+
+# login
+if shell_is_login; then
+    for i in ~/.bash/login/*.sh ; do
+        if [ -r "$i" ]; then
+            . $i
+        fi
+    done
+fi
+
 # Unset variables if necessary to avoid env polution
 
 if ! $EXPORT_FUNCTIONS ; then
@@ -69,7 +120,6 @@ if ! $EXPORT_FUNCTIONS ; then
     unset -f shell_is_interactive
     unset -f shell_is_script
 fi
-
 
 # Unset local variables
 
