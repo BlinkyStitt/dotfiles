@@ -1,14 +1,6 @@
-for i in ~/.bash/*.sh ; do
-    if [ -r "$i" ]; then
-        if [ "$PS1" ]; then
-            . $i
-        else
-            . $i >/dev/null 2>&1
-        fi
-    fi
-done
+source $HOME/.bash/dispatch.sh
 
 # use .localrc for settings specific to one system
-if [ -r ~/.bashrc.local ]; then
+if [ -r "$HOME/.bashrc.local" ]; then
     source ~/.bashrc.local
 fi
