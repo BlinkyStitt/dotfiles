@@ -16,7 +16,7 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
         echo "cd `pwd`"
     }
     _c() {
-        COMPREPLY=($(compgen -W '$(ls ${CODE_HOME})' -- ${COMP_WORDS[COMP_CWORD]}))
+        COMPREPLY=($(compgen -W '$(ls ${CODE_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
         return 0;
     }
 
