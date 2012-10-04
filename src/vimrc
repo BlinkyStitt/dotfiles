@@ -22,6 +22,9 @@ set expandtab
 " Always display the status line
 set laststatus=2
 
+" pretty format json with the help of python
+map <leader>js <Esc>:%!python -mjson.tool<CR>
+
 " Local config
 if filereadable(".vimrc.local")
   source .vimrc.local
