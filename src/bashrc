@@ -2,5 +2,5 @@ source $HOME/.bash/dispatch.sh
 
 # use .localrc for settings specific to one system
 if [ -r "$HOME/.bashrc.local" ]; then
-    source ~/.bashrc.local
+    source $HOME/.bashrc.local
 fi

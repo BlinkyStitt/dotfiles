@@ -16,10 +16,7 @@ export COLOR_BROWN='\033[0;33m'
 export COLOR_YELLOW='\033[1;33m'
 export COLOR_GRAY='\033[1;30m'
 export COLOR_LIGHT_GRAY='\033[0;37m'
-alias colorslist="set | egrep 'COLOR_\w*'"
-
-# prompt
-export PS1="\[$COLOR_GREEN\][\u@\h \W]\$ \[${COLOR_NC}\]"
+alias colorslist="set | egrep '^COLOR_\w*'"
 
 # grep color options
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
