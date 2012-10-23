@@ -1,3 +1,4 @@
+# this depends on bash completion's _cd
 if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
     # cd into UBER_HOME
     # todo: this is copy/pasted from ./code.sh, don't do that!
@@ -16,7 +17,11 @@ if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
         echo "cd `pwd`"
     }
     _uber() {
-        COMPREPLY=($(compgen -W '$(ls ${UBER_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
+        if [ -z $cur ]; then
+            COMPREPLY=($(compgen -W '$(ls ${UBER_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
+        else
+            _cd
+        fi
         return 0;
     }
 
