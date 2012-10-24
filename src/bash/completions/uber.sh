@@ -17,12 +17,8 @@ if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
         echo "cd `pwd`"
     }
     _uber() {
-        if [ -z $cur ]; then
-            COMPREPLY=($(compgen -W '$(ls ${UBER_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
-        else
-            _cd
-        fi
-        return 0;
+        COMPREPLY=($(compgen -W '$(ls ${UBER_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
+        return 0
     }
 
     complete -o default -o nospace -F _uber u;
