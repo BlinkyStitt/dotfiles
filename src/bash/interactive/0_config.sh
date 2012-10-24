@@ -59,3 +59,6 @@ shopt -s autocd checkjobs globstar > /dev/null 2>&1
 if [ -d "$HOME/code" ]; then
     export CODE_HOME="$HOME/code"
 fi
+if [ -d "$HOME/stitthappens" ]; then
+    export STITTHAPPENS_HOME="$HOME/stitthappens"
+fi
