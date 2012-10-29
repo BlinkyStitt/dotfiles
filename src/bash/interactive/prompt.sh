@@ -33,6 +33,11 @@ else
     STAT_COLOR=$PS1_GREEN
 fi;
 STAT_MSG="$STAT_COLOR$LAST_STATUS_CODE$PS1_NC";
+if [ -n "$VIRTUAL_ENV" ]; then
+	VIRTUALENV_PS1="(`basename \"$VIRTUAL_ENV\"`) "
+else
+	VIRTUALENV_PS1=""
+fi;
 SHORTENED_PWD=`_dir_chomp "$(pwd)" 20`;
 _GIT_TMP=`__git_ps1`;
 if [[ $_GIT_TMP ]]; then
@@ -46,6 +51,6 @@ if [ "$(id -u)" != "0" ]; then
 else
     COLOR_USER="$PS1_BLUE"
     USER_PROMPT="\#"
-fi
-export PS1="$STAT_MSG $USER_COLOR\\u@\\h $PS1_LIGHT_GREEN$SHORTENED_PWD$GIT_PS1$PS1_GREEN $PS1_NC$USER_PROMPT "
+fi;
+export PS1="$STAT_MSG $VIRTUALENV_PS1$USER_COLOR\\u@\\h $PS1_LIGHT_GREEN$SHORTENED_PWD$GIT_PS1$PS1_GREEN $PS1_NC$USER_PROMPT "
 EOF
