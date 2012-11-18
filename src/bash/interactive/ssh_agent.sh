@@ -26,7 +26,8 @@ function start_agent {
      echo "Initialising new SSH agent..."
      # make sure our environment file exists with the proper permissions
      if [ ! -e ${SSH_ENV} ]; then
-          touch "${SSH_ENV}"
+        mkdir -p "${HOME}/.ssh"
+        touch "${SSH_ENV}"
      fi
      chmod 600 "${SSH_ENV}"
 
