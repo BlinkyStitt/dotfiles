@@ -80,6 +80,11 @@ if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
   source "${HOME}/.rvm/scripts/rvm"
 fi
 
+# postgres one click installer
+if [ -d "/Library/PostgreSQL/9.1/bin" ] ; then
+  PATH="$PATH:/Library/PostgreSQL/9.1/bin"
+fi
+
 # add the user's bin folder to the path
 if [ -d "${HOME}/.bin" ]; then
   PATH="${HOME}/.bin:$PATH"
