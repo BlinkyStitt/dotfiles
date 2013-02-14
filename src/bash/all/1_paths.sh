@@ -35,30 +35,34 @@ fi
 
 # homebrew
 if command_exists brew; then
-  BREW_PATH=`brew --prefix`
-  # TODO: make sure brew is in /usr/local since it's a pain otherwise
-
-  if [ -d "${BREW_PATH}/bin" ]; then
-    # eventhough this is already on the path, we need to make it
-    # higher in priority    
-    PATH="${BREW_PATH}/bin:${PATH}"
-  fi
-  if [ -d "${BREW_PATH}/sbin" ]; then
-    PATH="${BREW_PATH}/sbin:${PATH}"
-  fi
-  if [ -d "${BREW_PATH}/share/python" ]; then
+  # if brew is already on the path. get that prefix so we can move it to the front
+  BREW_ROOT=`brew --prefix`
+elif [ -d "$HOME/.homebrew" ]; then
+  # no brew on the path, so check the user folder
+  # it is probably better to symlink brew into /usr/local/bin from here than to install here
+  BREW_ROOT="$HOME/.homebrew"
+fi
+if [ -n "$BREW_ROOT" ]; then
+  if [ -d "${BREW_ROOT}/share/python" ]; then
     PATH="${BREW_PATH}/share/python:${PATH}"
   fi
-  if [ -d "${BREW_PATH}/lib/node_modules" ]; then
+  if [ -d "${BREW_ROOT}/lib/node_modules" ]; then
     export NODE_PATH="${BREW_PATH}/lib/node_modules"
   fi
-
-  # mysql
-  if [ -d "${BREW_PATH}/mysql" ]; then
-    PATH="$PATH:${BREW_PATH}/mysql/bin"
-    DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:${BREW_PATH}/mysql/lib"
+  if [ -d "${BREW_ROOT}/sbin" ]; then
+    PATH="${BREW_PATH}/sbin:${PATH}"
   fi
-  unset BREW_PATH
+  if [ -d "${BREW_ROOT}/bin" ]; then
+    # eventhough this is already on the path, we need to make it
+    # higher in priority
+    PATH="${BREW_ROOT}/bin:${PATH}"
+  fi
+fi
+
+# mysql
+if [ -d "/usr/local/mysql" ]; then
+  PATH="$PATH:/usr/local/mysql/bin"
+  DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/mysql/lib"
 fi
 
 # ccache
@@ -69,9 +73,21 @@ if command_exists ccache; then
         if [ -d "${CCACHE_LIBEXEC}" ]; then
             PATH="${CCACHE_LIBEXEC}:${PATH}"
         fi
-        unset CCACHE_VERSION CCACHE_LIBEXEC
     elif [ -d "/usr/lib/ccache" ]; then
         PATH="/usr/lib/ccache:${PATH}"
+    fi
+fi
+
+# f90cache
+if command_exists f90cache; then
+    if command_exists brew; then
+        F90CACHE_VERSION=`f90cache -V | awk 'NR==1 {print $3}'`
+        F90CACHE_LIBEXEC=`brew --cellar f90cache`/${F90CACHE_VERSION}/libexec
+        if [ -d "${F90CACHE_LIBEXEC}" ]; then
+            PATH="${F90CACHE_LIBEXEC}:${PATH}"
+        fi
+    elif [ -d "/usr/lib/f90cache" ]; then
+        PATH="/usr/lib/f90cache:${PATH}"
     fi
 fi
 
