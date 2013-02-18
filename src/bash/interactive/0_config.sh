@@ -62,3 +62,6 @@ fi
 if [ -d "$HOME/stitthappens" ]; then
     export STITTHAPPENS_HOME="$HOME/stitthappens"
 fi
+if [ -d "$HOME/Uber" ]; then
+    export UBER_HOME="$HOME/Uber"
+fi
