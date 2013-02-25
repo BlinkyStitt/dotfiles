@@ -4,11 +4,6 @@ if [ -z "${ORIG_PATH}" ]; then
 else
   PATH=${ORIG_PATH}
 fi
-if [ -z "${ORIG_DYLD_LIBRARY_PATH}" ]; then
-  export ORIG_DYLD_LIBRARY_PATH="${DYLD_LIBRARY_PATH}"
-else
-  DYLD_LIBRARY_PATH="${ORIG_DYLD_LIBRARY_PATH}"
-fi
 if [ -z "${ORIG_NODE_PATH}" ]; then
   export ORIG_NODE_PATH="${NODE_PATH}"
 else
@@ -57,12 +52,6 @@ if [ -n "$BREW_ROOT" ]; then
     # higher in priority
     PATH="${BREW_ROOT}/bin:${PATH}"
   fi
-fi
-
-# mysql
-if [ -d "/usr/local/mysql" ]; then
-  PATH="$PATH:/usr/local/mysql/bin"
-  DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/mysql/lib"
 fi
 
 # ccache
@@ -115,6 +104,6 @@ if [ -r "${HOME}/.path.local" ]; then
   source "${HOME}/.path.local"
 fi
 
-export PATH DYLD_LIBRARY_PATH
+export PATH
 # TODO: set MANPATH
 #export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
