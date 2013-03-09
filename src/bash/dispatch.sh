@@ -44,8 +44,7 @@ if ! type -p shell_is_login ; then
 fi
 
 # Make $BASH_ENV the same in interactive and non-interactive scripts
-
-[ -z "$BASH_ENV" ] && export BASH_ENV="$BASH_SOURCE"
+#[ -z "$BASH_ENV" ] && export BASH_ENV="$BASH_SOURCE"
 
 # Make these available to the potentially convoluted bashrc_* startup scripts
 

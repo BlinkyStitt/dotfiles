@@ -15,19 +15,6 @@ else
   PYTHONPATH="${ORIG_PYTHONPATH}"
 fi
 
-# macports
-if [ -d "/opt/local/sbin" ]; then
-  PATH="/opt/local/sbin:${PATH}"
-fi
-if [ -d "/opt/local/bin" ]; then
-  PATH="/opt/local/bin:${PATH}"
-fi
-
-# fink
-if [ -d "/sw" ]; then
-  PATH="/sw/bin:${PATH}"
-fi
-
 # homebrew
 if command_exists brew; then
   # if brew is already on the path. get that prefix so we can move it to the front
@@ -52,6 +39,11 @@ if [ -n "$BREW_ROOT" ]; then
     # higher in priority
     PATH="${BREW_ROOT}/bin:${PATH}"
   fi
+fi
+
+# rvm
+if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
+  source "${HOME}/.rvm/scripts/rvm"
 fi
 
 # ccache
@@ -80,16 +72,6 @@ if command_exists f90cache; then
     fi
 fi
 
-# rvm
-if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
-  source "${HOME}/.rvm/scripts/rvm"
-fi
-
-# postgres one click installer
-if [ -d "/Library/PostgreSQL/9.1/bin" ] ; then
-  PATH="$PATH:/Library/PostgreSQL/9.1/bin"
-fi
-
 # add the user's bin folder to the path
 if [ -d "${HOME}/.bin" ]; then
   PATH="${HOME}/.bin:$PATH"
@@ -105,5 +87,3 @@ if [ -r "${HOME}/.path.local" ]; then
 fi
 
 export PATH
-# TODO: set MANPATH
-#export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
