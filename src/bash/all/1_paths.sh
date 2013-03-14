@@ -26,13 +26,13 @@ elif [ -d "$HOME/.homebrew" ]; then
 fi
 if [ -n "$BREW_ROOT" ]; then
   if [ -d "${BREW_ROOT}/share/python" ]; then
-    PATH="${BREW_PATH}/share/python:${PATH}"
+    PATH="${BREW_ROOT}/share/python:${PATH}"
   fi
   if [ -d "${BREW_ROOT}/lib/node_modules" ]; then
     export NODE_PATH="${BREW_PATH}/lib/node_modules"
   fi
   if [ -d "${BREW_ROOT}/sbin" ]; then
-    PATH="${BREW_PATH}/sbin:${PATH}"
+    PATH="${BREW_ROOT}/sbin:${PATH}"
   fi
   if [ -d "${BREW_ROOT}/bin" ]; then
     # eventhough this is already on the path, we need to make it
