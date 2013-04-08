@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+puts "[Cheese!]"
+
+# Get some info about current commit
+repository_name = `basename "$PWD"`.chop
+commit_hash, commit_date = `git log -1 --pretty="%H%n%ci"`.split(/\r?\n/)
+
+# Capture image and save it to ~/Pictures/gitshots/REPOSITORYNAME-TIMESTAMP-COMMITHASH.jpeg
+exec "imagesnap ~/Pictures/gitshots/#{repository_name}_#{commit_date.gsub!(' ', '_')}_#{commit_hash}.jpeg"
+exit 1
