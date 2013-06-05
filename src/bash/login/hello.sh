@@ -8,6 +8,6 @@ if shell_is_interactive; then
     if command_exists cowsay; then
         fortune -s | cowsay -W 76
     else
-        echo $WELCOME
+        fortune -s
     fi
 fi
