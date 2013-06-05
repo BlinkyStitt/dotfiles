@@ -6,7 +6,7 @@ if shell_is_interactive; then
     echo -e "${COLOR_NC}Don't forget to update your dotfiles!"
 
     if command_exists cowsay; then
-        fortune | cowsay -n
+        fortune -s | cowsay -W 76
     else
         echo $WELCOME
     fi
