@@ -1,50 +1,10 @@
 " based on https://github.com/jferris/config_files/blob/master/vimrc
 execute pathogen#infect()
-
-set encoding=utf-8
-set fileencoding=utf-8
-scriptencoding utf-8
-
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" Switch wrap on for everything
-set wrap
-
-" Softtabs, 4 spaces
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" Always display the status line
-set laststatus=2
+syntax on
+filetype plugin indent on
 
 " pretty format json with the help of python
 map <leader>js <Esc>:%!python -mjson.tool<CR>
-
-" better statusline
-set statusline=%t       "tail of the filename
-set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}] "file format
-set statusline+=%h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%y      "filetype
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-
-" python fixes
-set softtabstop=4
-set shiftwidth=4
-set autoindent
-syntax on
-filetype plugin indent on
 
 " Local config
 if filereadable(".vimrc.local")
