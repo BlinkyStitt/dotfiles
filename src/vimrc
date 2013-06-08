@@ -1,4 +1,4 @@
-" based on https://github.com/jferris/config_files/blob/master/vimrc
+" setup plugins
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -10,4 +10,3 @@ map <leader>js <Esc>:%!python -mjson.tool<CR>
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
-
