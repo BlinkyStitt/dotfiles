@@ -1,5 +1,6 @@
-
 " based on https://github.com/jferris/config_files/blob/master/vimrc
+execute pathogen#infect()
+
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8
@@ -25,11 +26,6 @@ set laststatus=2
 " pretty format json with the help of python
 map <leader>js <Esc>:%!python -mjson.tool<CR>
 
-" Local config
-if filereadable(".vimrc.local")
-  source .vimrc.local
-endif
-
 " better statusline
 set statusline=%t       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -49,3 +45,9 @@ set shiftwidth=4
 set autoindent
 syntax on
 filetype plugin indent on
+
+" Local config
+if filereadable(".vimrc.local")
+  source .vimrc.local
+endif
+
