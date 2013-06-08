@@ -1,6 +1,12 @@
 dotfiles
 ========
 
+Much thanks to...
+
+- Tim Pope for Pathogen and other vim plugins
+- Joseph Wecker for https://github.com/josephwecker/bashrc_dispatch
+- Benjamin D. Williams for vim-markdown
+
 
 Installing
 ----------
