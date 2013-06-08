@@ -3,9 +3,10 @@ dotfiles
 
 Much thanks to...
 
-- Tim Pope for Pathogen and other vim plugins
-- Joseph Wecker for https://github.com/josephwecker/bashrc_dispatch
-- Benjamin D. Williams for vim-markdown
+- josephwecker for [bashrc_dispatch](https://github.com/josephwecker/bashrc_dispatch)
+- nojhan for [liquidprompt](https://github.com/nojhan/liquidprompt)
+- plasticboy for [vim-markdown](https://github.com/plasticboy/vim-markdown)
+- tpope for [vim-pathogen](https://github.com/tpope/vim-pathogen) and other vim plugins
 
 
 Installing
