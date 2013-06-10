@@ -3,6 +3,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+set undodir=~/.vim/undodir
+
 " pretty format json with the help of python
 map <leader>js <Esc>:%!python -mjson.tool<CR>
 
