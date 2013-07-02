@@ -10,6 +10,7 @@ for i in ~/.bash/completions/*.sh ; do
     fi
 done
 
+# homebrew completion
 if command_exists brew; then
   if [ -r `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion

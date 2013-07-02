@@ -49,8 +49,7 @@ fi
 # ccache
 if command_exists ccache; then
     if command_exists brew; then
-        CCACHE_VERSION=`ccache -V | awk 'NR==1 {print $3}'`
-        CCACHE_LIBEXEC=`brew --cellar ccache`/${CCACHE_VERSION}/libexec
+        CCACHE_LIBEXEC=`brew --prefix ccache`/libexec
         if [ -d "${CCACHE_LIBEXEC}" ]; then
             PATH="${CCACHE_LIBEXEC}:${PATH}"
         fi
@@ -62,14 +61,18 @@ fi
 # f90cache
 if command_exists f90cache; then
     if command_exists brew; then
-        F90CACHE_VERSION=`f90cache -V | awk 'NR==1 {print $3}'`
-        F90CACHE_LIBEXEC=`brew --cellar f90cache`/${F90CACHE_VERSION}/libexec
+        F90CACHE_LIBEXEC=`brew --prefix f90cache`/libexec
         if [ -d "${F90CACHE_LIBEXEC}" ]; then
             PATH="${F90CACHE_LIBEXEC}:${PATH}"
         fi
     elif [ -d "/usr/lib/f90cache" ]; then
         PATH="/usr/lib/f90cache:${PATH}"
     fi
+fi
+
+# pyenv
+if command_exists pyenv; then
+  eval "$(pyenv init -)"
 fi
 
 # add the user's bin folder to the path

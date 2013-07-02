@@ -1,6 +1,7 @@
 # find virtualenvwrapper.sh anywhere on your path
 # export WORKON_HOME="${HOME}/.virtualenvs"   # this is the default
-if command_exists virtualenvwrapper.sh; then
+
+if ! command_exists pyenv && command_exists virtualenvwrapper.sh; then
     source `which virtualenvwrapper.sh`
 fi
 
