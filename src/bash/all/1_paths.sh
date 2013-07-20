@@ -70,6 +70,10 @@ if command_exists f90cache; then
     fi
 fi
 
+if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
+    PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
+fi
+
 # pyenv
 if command_exists pyenv; then
   eval "$(pyenv init -)"
