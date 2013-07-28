@@ -25,9 +25,6 @@ elif [ -d "$HOME/.homebrew" ]; then
   BREW_ROOT="$HOME/.homebrew"
 fi
 if [ -n "$BREW_ROOT" ]; then
-  if [ -d "${BREW_ROOT}/share/python" ]; then
-    PATH="${BREW_ROOT}/share/python:${PATH}"
-  fi
   if [ -d "${BREW_ROOT}/lib/node_modules" ]; then
     export NODE_PATH="${BREW_PATH}/lib/node_modules"
   fi
