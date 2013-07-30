@@ -3,6 +3,10 @@
 # example usage: trustgraph.sh bryan@uber.com "@uber.com Ignas"
 # example usage: trustgraph.sh @uber.com "@uber.com Ignas" uber_wot
 
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 if [ -n "${1}" ]; then
     KEYS=${1}
 else
@@ -22,16 +26,16 @@ fi
 gpg --refresh-keys $KEYS
 
 # get the key(s) that have signed the key(s) specified
-gpg --list-sigs $KEYS | grep ^sig | cut -c 14- | cut -d' ' -f1 | sort | uniq > "$FILENAME.ids"
-gpg --recv-keys `cat $FILENAME.ids`
+gpg --list-sigs $KEYS | grep ^sig | cut -c 14- | cut -d' ' -f1 | sort | uniq >"${FILENAME}.ids"
+gpg --recv-keys `cat ${FILENAME}.ids`
 
 # save the relevant key(s) to a separate keychain
-gpg --export `cat $FILENAME.ids` > "$FILENAME.gpg"
+gpg --export `cat ${FILENAME}.ids` >"${FILENAME}.gpg"
 
 # todo: also get the keys that have been signed by the key(s) specified
 
 # filter the separate keychain and turn it into a dot
 # todo: `neato -Tps` looks better, but doesn't handle non-Latin1 characters
-gpg --no-default-keyring --keyring "$FILENAME.gpg" --list-sigs $FILTERS | sig2dot.pl | neato -Gconcentrate=true > "$FILENAME.dot"
+gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.gpg)" --list-sigs ${FILTERS} | sig2dot.pl | neato > "${FILENAME}.dot"
 
-open "$FILENAME.dot"
+open "${FILENAME}.dot"
