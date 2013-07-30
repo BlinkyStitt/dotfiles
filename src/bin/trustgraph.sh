@@ -28,6 +28,8 @@ gpg --recv-keys `cat /tmp/$FILENAME.ids`
 # save the relevant keys to a separate keychain
 gpg --export `cat /tmp/$FILENAME.ids` > "/tmp/$FILENAME.gpg"
 
+# get the keys that have been signed by the key(s) specified
+
 # filter the separate keychain and turn it into a dot
 # todo: `neato -Tps` looks better, but doesn't handle non-Latin1 characters
 gpg --no-default-keyring --keyring "/tmp/$FILENAME.gpg" --list-sigs $FILTERS | sig2dot.pl | neato -Gconcentrate=true > "$FILENAME.dot"
