@@ -26,16 +26,18 @@ fi
 gpg --refresh-keys $KEYS
 
 # get the key(s) that have signed the key(s) specified
-gpg --list-sigs $KEYS | grep ^sig | cut -c 14- | cut -d' ' -f1 | sort | uniq >"${FILENAME}.ids"
-gpg --recv-keys `cat ${FILENAME}.ids`
+gpg --list-sigs $KEYS | grep ^sig | cut -c 14- | cut -d' ' -f1 | sort | uniq >"${FILENAME}.temp-ids"
+gpg --recv-keys `cat ${FILENAME}.temp-ids`
 
 # save the relevant key(s) to a separate keychain
-gpg --export `cat ${FILENAME}.ids` >"${FILENAME}.gpg"
+gpg --export `cat ${FILENAME}.temp-ids` >"${FILENAME}.temp-gpg"
 
 # todo: also get the keys that have been signed by the key(s) specified
 
 # filter the separate keychain and turn it into a dot
-# todo: `neato -Tps` looks better, but doesn't handle non-Latin1 characters
-gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.gpg)" --list-sigs ${FILTERS} | sig2dot.pl | neato > "${FILENAME}.dot"
+gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.temp-gpg)" --export ${FILTERS} >"${FILENAME}.gpg"
+gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.temp-gpg)" --list-sigs ${FILTERS} | sig2dot.pl | neato > "${FILENAME}.dot"
+
+rm ${FILENAME}.temp-gpg ${FILENAME}.temp-ids
 
 open "${FILENAME}.dot"
