@@ -57,8 +57,7 @@ publicKeyToAddress() {
     )
 }
 
-hash256ToAddress() {	
-	#printf "80$1$(checksum "80$1")"
+hash256ToAddress() {    
     printf "%34s\n" "$(encodeBase58 "80$1$(checksum "80$1")")" |
     sed "y/ /1/"
 }
@@ -91,7 +90,7 @@ echo "Pressing ENTER will continue the script!"
 
 read random
 
-openssl  ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null
+openssl ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null
 
 echo " "
 echo " "
@@ -101,9 +100,8 @@ echo " "
 
 hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' ) 
 
-while [ ${#hexsize} -ne 64 ]
-do
-openssl  ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' ) 
+while [ ${#hexsize} -ne 64 ]; do
+    openssl ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' ) 
 done
 
 openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' 
@@ -137,11 +135,9 @@ echo " "
 
 openssl ec -pubout < data.pem | publicKeyToAddress
 
-openssl  ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && rm data.pem
+openssl ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && rm data.pem
 
 echo " "
 echo "Hit ENTER to exit"
 read random
 exit 0
-
-
