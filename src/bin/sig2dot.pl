@@ -144,7 +144,7 @@ if ($opt{u}) {
 if ($opt{r}) {
   $revokestr = lc $opt{r};
 } else {
-  $revokestr = "[revoked]"; # this changed from gpg 1.2 -> 1.4
+  $revokestr = "[revoked"; # this changed from gpg 1.2 -> 1.4
 }
 
 my ($owner, %name, %revlist, %sigstmp, %signedbytmp, @names, %revs);
