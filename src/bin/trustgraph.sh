@@ -36,7 +36,7 @@ gpg --export `cat ${FILENAME}.temp-ids` >"${FILENAME}.temp-gpg"
 
 # filter the separate keychain and turn it into a dot
 gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.temp-gpg)" --export ${FILTERS} >"${FILENAME}.gpg"
-gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.temp-gpg)" --list-sigs ${FILTERS} | sig2dot.pl | neato > "${FILENAME}.dot"
+gpg --no-default-keyring --keyring "$(realpath ${FILENAME}.temp-gpg)" --list-sigs ${FILTERS} | sig2dot.pl > "${FILENAME}.dot"
 
 rm ${FILENAME}.temp-gpg ${FILENAME}.temp-ids
 
