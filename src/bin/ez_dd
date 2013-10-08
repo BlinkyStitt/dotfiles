@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: ez_dd source dest [bs=1m]
+# usage: ez_dd source dest [bs=8m]
 
 if shell_is_osx; then
     INPUT_SIZE=$(du -sk ${1} | awk '{print $1*1024}')
@@ -10,7 +10,7 @@ fi
 if [ -n "$3" ]; then
     BLOCK_SIZE=$3
 else
-    BLOCK_SIZE="1m"
+    BLOCK_SIZE="8m"
 fi
 
 set -o pipefail
