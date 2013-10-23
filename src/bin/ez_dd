@@ -1,0 +1,21 @@
+#!/bin/bash
+# usage: ez_dd source dest [bs=8m]
+
+if shell_is_osx; then
+    INPUT_SIZE=$(du -sk ${1} | awk '{print $1*1024}')
+else
+    INPUT_SIZE=$(du -sb ${1} | awk '{print $1}')
+fi
+
+if [ -n "$3" ]; then
+    BLOCK_SIZE=$3
+else
+    BLOCK_SIZE="8m"
+fi
+
+set -o pipefail
+set -e
+
+sudo echo "dd if=$1 of=$2 bs=$BLOCK_SIZE"
+cat ${1} | pv -brtp -s $INPUT_SIZE | sudo dd of=${2} bs=$BLOCK_SIZE
+
