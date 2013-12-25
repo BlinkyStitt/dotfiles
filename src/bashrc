@@ -1,3 +1,8 @@
+if [ -n "$HOMEBREW_BREW_FILE" ]; then
+    echo "Bypassing .bashrc because of brew"
+    return 0
+fi
+
 source $HOME/.bash/dispatch.sh
 
 # use .localrc for settings specific to one system
