@@ -15,7 +15,7 @@ Installing
 ```
 git clone git://github.com/nojhan/liquidprompt.git ~/.liquidprompt
 git clone git://github.com/WyseNynja/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles/install
+~/.dotfiles/install
 . ~/.bashrc
 ```
 
