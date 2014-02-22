@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 import os
 import shutil
+import subprocess
 import sys
 
 
 src = sys.path[0] + '/src'
-home = os.getenv("HOME")
+home = os.environ['HOME']
+liquidprompt_src = os.path.join(home, '.liquidprompt')
 
 for file in os.listdir(src):
-    source = src + '/' + file
-    destination = home + '/.' + file
+    source = os.path.join(src, file)
+    destination = os.path.join(home, '.' + file)
 
     print "linking %s to %s..." % (source, destination)
 
@@ -22,7 +24,10 @@ for file in os.listdir(src):
 
     os.symlink(source, destination)
 
-# todo: create ~/.gitconfig
+if os.path.exists(liquidprompt_src):
+    print 'Updating liquidprompt...'
+    os.chdir(liquidprompt_src)
+    subprocess.check_call('git pull', shell=True)
 
 print 'SUCCESS!'
 print 'You should run ". ~/.bashrc"'
