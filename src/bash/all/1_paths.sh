@@ -71,6 +71,11 @@ if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
     PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
 fi
 
+# nvm
+if [ -r "${HOME}/.nvm/nvm.sh" ]; then
+  source "${HOME}/.nvm/nvm.sh"
+fi
+
 # pyenv
 if command_exists pyenv; then
   eval "$(pyenv init -)"
