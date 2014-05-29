@@ -1,11 +1,11 @@
 #!/usr/bin/env python
+import distutils
 import os
 import subprocess
 
+
 keepcharacters = (' ', '.', '_', '-')
 picture_dir = os.path.expanduser(os.path.join('~', 'Pictures', 'gitshots'))
-
-print "[Say Cheese!]"
 
 
 def git(*args):
@@ -23,4 +23,9 @@ picture_name = "{repo_name}_{commit_date}_{commit_hash}.jpeg".format(
     commit_hash=commit_hash,
 )
 
-subprocess.check_call(['imagesnap', os.path.join(picture_dir, picture_name)])
+print "[Say Cheese!]"
+
+try:
+    subprocess.check_call(['imagesnap', os.path.join(picture_dir, picture_name)])
+except OSError:
+    print "imagesnap is not installed."
