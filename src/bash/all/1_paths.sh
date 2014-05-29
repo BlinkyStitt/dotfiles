@@ -15,6 +15,11 @@ else
   PYTHONPATH="${ORIG_PYTHONPATH}"
 fi
 
+# git-annex
+if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
+    PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
+fi
+
 # homebrew
 if command_exists brew; then
   # if brew is already on the path. get that prefix so we can move it to the front
@@ -25,6 +30,7 @@ elif [ -d "$HOME/.homebrew" ]; then
   BREW_ROOT="$HOME/.homebrew"
 fi
 if [ -n "$BREW_ROOT" ]; then
+  # generally I use nvm, but support brew-installed node
   if [ -d "${BREW_ROOT}/lib/node_modules" ]; then
     export NODE_PATH="${BREW_PATH}/lib/node_modules"
   fi
@@ -32,10 +38,19 @@ if [ -n "$BREW_ROOT" ]; then
     PATH="${BREW_ROOT}/sbin:${PATH}"
   fi
   if [ -d "${BREW_ROOT}/bin" ]; then
-    # eventhough this is already on the path, we need to make it
-    # higher in priority
+    # eventhough this is already on the path, we need to make it higher priority
     PATH="${BREW_ROOT}/bin:${PATH}"
   fi
+fi
+
+# nvm
+if [ -r "${HOME}/.nvm/nvm.sh" ]; then
+  source "${HOME}/.nvm/nvm.sh"
+fi
+
+# pyenv
+if command_exists pyenv; then
+  eval "$(pyenv init -)"
 fi
 
 # rvm
@@ -81,7 +96,7 @@ if command_exists pyenv; then
   eval "$(pyenv init -)"
 fi
 
-# add the user's bin folder to the path
+# add the user's bin folders to the path
 if [ -d "${HOME}/.bin" ]; then
   PATH="${HOME}/.bin:$PATH"
 fi
@@ -90,9 +105,9 @@ if [ -d "${HOME}/bin" ]; then
 fi
 
 # local settings
-# this is leaded separately from .bashrc.local so that it can be loaded now
+# load this now so that the rest of the scripts have access to the complete PATH
 if [ -r "${HOME}/.path.local" ]; then
   source "${HOME}/.path.local"
 fi
 
-export PATH
+export PATH NODE_PATH PYTHONPATH

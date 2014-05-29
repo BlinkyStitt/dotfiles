@@ -7,10 +7,11 @@ import sys
 
 src = sys.path[0] + '/src'
 home = os.path.expanduser('~')
+liquidprompt_src = os.path.join(home, '.liquidprompt')
 
 for file in os.listdir(src):
-    source = src + '/' + file
-    destination = home + '/.' + file
+    source = os.path.join(src, file)
+    destination = os.path.join(home, '.' + file)
 
     print "linking %s to %s..." % (source, destination)
 
@@ -22,6 +23,12 @@ for file in os.listdir(src):
         shutil.rmtree(destination)
 
     os.symlink(source, destination)
+
+# update liquidpromt
+if os.path.exists(liquidprompt_src):
+    print 'Updating liquidprompt...'
+    os.chdir(liquidprompt_src)
+    subprocess.check_call('git pull', shell=True)
 
 # create ~/.gitconfig
 git_commands = []

@@ -2,7 +2,7 @@
 # Take a domain and search in a subdirectory of pass for matching username and
 # passwords to put into the clipboard.
 
-if [[ $# -lt 1 ]]; then
+if [ $# -lt 1 ]; then
     echo "Usage: $0 domain"
     exit 1
 fi
@@ -13,10 +13,10 @@ DOMAIN=$1
 PASS_PATH="${BASE_PATH}/${DOMAIN}"
 
 USERNAMES=( $(pass ls $PASS_PATH | sed 1d | cut -d' ' -f2) )
-if [[ $? -ne 0 ]]; then
+if [ $? -ne 0 ]; then
     exit $?
 fi
-if [[ -z $USERNAMES ]]; then
+if [ -z "$USERNAMES" ]; then
     echo "No usernames found for ${DOMAIN}."
     exit 1
 fi
@@ -31,7 +31,7 @@ echo -n "Select a username: [0] "
 read USER_ID
 
 USER=${USERNAMES[${USER_ID}]}
-if [[ -z $USER ]]; then
+if [ -z "$USER" ]; then
     echo "No username found with that id."
     exit 1
 fi
