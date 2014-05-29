@@ -13,7 +13,7 @@ _fab_completion()
         COMPREPLY=( $(compgen -W "${result}" -- ${cur}) )
         return 0
     else
-        # no fabfile.py found. Don't do anything.        
+        # no fabfile.py found. Don't do anything.
         return 1
     fi
 }

@@ -1,5 +1,6 @@
 if [[ -n ${STITTHAPPENS_HOME} && -d ${STITTHAPPENS_HOME} ]]; then
     # cd into stitthappens directory
+    # todo: this is copy/pasted from ./code.sh, don't do that!
     s() {
         if [ -z $1 ]; then
             cd ${STITTHAPPENS_HOME}
@@ -16,7 +17,7 @@ if [[ -n ${STITTHAPPENS_HOME} && -d ${STITTHAPPENS_HOME} ]]; then
     }
     _s() {
         COMPREPLY=($(compgen -W '$(ls ${STITTHAPPENS_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
-        return 0;
+        return 0
     }
 
     complete -o default -o nospace -F _s s

@@ -1,6 +1,6 @@
 if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
     # cd into the code directory
-    # todo: don't hard code the dir
+    # todo: make this work deeper than one level
     c() {
         if [ -z $1 ]; then
             cd ${CODE_HOME}

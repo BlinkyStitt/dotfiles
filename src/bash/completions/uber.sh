@@ -1,4 +1,3 @@
-# this depends on bash completion's _cd
 if [[ -n ${UBER_HOME} && -d ${UBER_HOME} ]]; then
     # cd into UBER_HOME
     # todo: this is copy/pasted from ./code.sh, don't do that!

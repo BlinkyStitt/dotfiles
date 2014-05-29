@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 base58=({1..9} {A..H} {J..N} {P..Z} {a..k} {m..z})
 bitcoinregex="^[$(printf "%s" "${base58[@]}")]{34}$"
@@ -8,7 +8,7 @@ decodeBase58() {
     for i in {0..57}
     do s="${s//${base58[i]}/ $i}"
     done
-    dc <<< "16o0d${s// /+58*}+f" 
+    dc <<< "16o0d${s// /+58*}+f"
 }
 
 encodeBase58() {
@@ -57,7 +57,7 @@ publicKeyToAddress() {
     )
 }
 
-hash256ToAddress() {    
+hash256ToAddress() {
     printf "%34s\n" "$(encodeBase58 "80$1$(checksum "80$1")")" |
     sed "y/ /1/"
 }
@@ -101,10 +101,10 @@ echo " "
 hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' ) 
 
 while [ ${#hexsize} -ne 64 ]; do
-    openssl ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' ) 
+    openssl ecparam -genkey -name secp256k1 | tee data.pem &>/dev/null && hexsize=$(openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' )
 done
 
-openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g' 
+openssl ec -text -noout -in data.pem | head -5 | tail -3 | fmt -120 | sed 's/[: ]//g'
 
 echo "Hit ENTER to continue"
 read random
