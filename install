@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import os
 import shutil
+import subprocess
 import sys
 
 
 src = sys.path[0] + '/src'
-home = os.getenv("HOME")
+home = os.path.expanduser('~')
 
 for file in os.listdir(src):
     source = src + '/' + file
@@ -22,7 +23,50 @@ for file in os.listdir(src):
 
     os.symlink(source, destination)
 
-# todo: create ~/.gitconfig
+# create ~/.gitconfig
+git_commands = []
 
+# only prompt these on first run
+if not os.path.exists(os.path.join(home, '.gitconfig')):
+    # todo: prompt for username
+    user_name = 'Bryan Stitt'
+    # todo: prompt for email
+    user_email = 'bryan@stitthappens.com'
+
+    git_commands += [
+        ['git', 'config', '--global', 'user.name', user_name],
+        ['git', 'config', '--global', 'user.email', user_email],
+    ]
+
+# running this command multiple times duplicates the config line
+try:
+    current_templatedir = subprocess.check_output(['git', 'config', '--global', 'init.templatedir'])
+except subprocess.CalledProcessError:
+    current_templatedir = ''
+if "~/.git_template\n" not in current_templatedir:
+    git_commands += [
+        ['git', 'config', '--global', 'init.templatedir', '~/.git_template'],
+    ]
+
+if sys.platform == 'darwin':
+    git_commands += [
+        ['git', 'config', '--global', 'credential.helper', 'osxkeychain'],
+    ]
+
+git_commands += [
+    # these commands are safe to run every time
+    ['git', 'config', '--global', 'color.ui', 'auto'],
+    ['git', 'config', '--global', 'push.default', 'simple'],
+    ['git', 'config', '--global', 'rerere.enabled', 'true'],
+    ['git', 'config', '--global', 'url.ssh://git@github.com/.insteadOf', 'https://github.com/'],  # always use ssh key auth with github
+    # keep --list last
+    ['git', 'config', '--global', '--list'],
+]
+
+print ''
+print '~/.gitconfig:'
+map(subprocess.check_call, git_commands)
+
+print ''
 print 'SUCCESS!'
 print 'You should run ". ~/.bashrc"'
