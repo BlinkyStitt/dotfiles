@@ -7,6 +7,8 @@ import subprocess
 keepcharacters = (' ', '.', '_', '-')
 picture_dir = os.path.expanduser(os.path.join('~', 'Pictures', 'gitshots'))
 
+if not os.path.exists(picture_dir):
+    os.makedirs(picture_dir)
 
 def git(*args):
     return subprocess.check_output(['git'] + list(args))
@@ -17,15 +19,18 @@ clean_repository_name = "".join(c for c in repository_name.lstrip('.') if c.isal
 
 commit_hash, commit_date = git('log', '-1', '--pretty=%H %at').strip().split(' ', 1)
 
-picture_name = "{repo_name}_{commit_date}_{commit_hash}.jpeg".format(
+picture_name = "{commit_date}_{repo_name}_{commit_hash}.jpeg".format(
     repo_name=clean_repository_name,
     commit_date=commit_date,
     commit_hash=commit_hash,
 )
 
-print "[Say Cheese!]"
+print "Say Cheese!"
 
 try:
-    subprocess.check_call(['imagesnap', os.path.join(picture_dir, picture_name)])
+    subprocess.check_call(['imagesnap', '-q', os.path.join(picture_dir, picture_name)])
 except OSError:
     print "imagesnap is not installed."
+
+print "gitshot saved to {}".format(picture_name)
+print ""
