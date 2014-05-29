@@ -1,10 +1,26 @@
-#!/usr/bin/env ruby
-puts "[Cheese!]"
+#!/usr/bin/env python
+import os
+import subprocess
 
-# Get some info about current commit
-repository_name = `basename "$PWD"`.chop
-commit_hash, commit_date = `git log -1 --pretty="%H%n%ci"`.split(/\r?\n/)
+keepcharacters = (' ', '.', '_', '-')
+picture_dir = os.path.expanduser(os.path.join('~', 'Pictures', 'gitshots'))
 
-# Capture image and save it to ~/Pictures/gitshots/REPOSITORYNAME-TIMESTAMP-COMMITHASH.jpeg
-exec "imagesnap ~/Pictures/gitshots/#{repository_name}_#{commit_date.gsub!(' ', '_')}_#{commit_hash}.jpeg"
-exit 1
+print "[Say Cheese!]"
+
+
+def git(*args):
+    return subprocess.check_output(['git'] + list(args))
+
+
+repository_name = os.path.basename(os.getcwd())
+clean_repository_name = "".join(c for c in repository_name.lstrip('.') if c.isalnum() or c in keepcharacters).rstrip()
+
+commit_hash, commit_date = git('log', '-1', '--pretty=%H %at').strip().split(' ', 1)
+
+picture_name = "{repo_name}_{commit_date}_{commit_hash}.jpeg".format(
+    repo_name=clean_repository_name,
+    commit_date=commit_date,
+    commit_hash=commit_hash,
+)
+
+subprocess.check_call(['imagesnap', os.path.join(picture_dir, picture_name)])
