@@ -27,10 +27,12 @@ picture_name = "{commit_date}_{repo_name}_{commit_hash}.jpeg".format(
 
 print "Say Cheese!"
 
+picture_filepath = os.path.join(picture_dir, picture_name)
+
 try:
-    subprocess.check_call(['imagesnap', '-q', os.path.join(picture_dir, picture_name)])
+    subprocess.check_call(['imagesnap', '-q', picture_filepath])
 except OSError:
     print "imagesnap is not installed."
 
-print "gitshot saved to {}".format(picture_name)
+print "gitshot saved to {}".format(picture_filepath)
 print ""
