@@ -60,10 +60,14 @@ if sys.platform == 'darwin':
         ['git', 'config', '--global', 'credential.helper', 'osxkeychain'],
     ]
 
+if False:  # todo: if git_version >= 1.8
+    git_commands += [
+        ['git', 'config', '--global', 'push.default', 'simple'],
+    ]
+
 git_commands += [
     # these commands are safe to run every time
     ['git', 'config', '--global', 'color.ui', 'auto'],
-    ['git', 'config', '--global', 'push.default', 'simple'],
     ['git', 'config', '--global', 'rerere.enabled', 'true'],
     ['git', 'config', '--global', 'url.ssh://git@github.com/.insteadOf', 'https://github.com/'],  # always use ssh key auth with github
     # keep --list last
