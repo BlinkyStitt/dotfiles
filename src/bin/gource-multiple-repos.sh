@@ -4,29 +4,37 @@
 # Example:
 # <this.sh> /path/to/repo1 /path/to/repo2
 
-OUTFILE="gource.mp4"
+RESOLUTION="1600x1080"
+outfile="gource.mp4"
 
-set -x
-
-combined_log="$(mktemp /tmp/gource_combined.XXXXXX)"
+i=0
 for repo in $*; do
-    # output the repo to a logfile
+    # 1. Generate a Gource custom log files for each repo. This can be facilitated by the --output-custom-log FILE option of Gource as of 0.29:
     logfile="$(mktemp /tmp/gource.XXXXXX)"
     gource --output-custom-log "${logfile}" ${repo}
-
-    # namespace the repos
-    sed -E 's/(.+)\|/\1\|\/'${repo}'/' ${logfile} >> $combined_log
-
-    # delete temp logfile
-    rm ${logfile}
+    # 2. If you want each repo to appear on a separate branch instead of merged onto each other (which might also look interesting), you can use a 'sed' regular expression to add an extra parent directory to the path of the files in each project:
+    sed -i -E "s#(.+)\|#\1|/${repo}#" ${logfile}
+    logs[$i]=$logfile
+    let i=$i+1
 done
 
-# sort the combined_log
-sort -n -o $combined_log $combined_log
+combined_log="$(mktemp /tmp/gource.XXXXXX)"
+cat ${logs[@]} | sort -n > $combined_log
+rm ${logs[@]}
 
-# run the log through gource and ouput to ffmpeg
-# todo: lots of possible flags to pass
-time gource -o - --time-scale 4.0 $combined_log | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
+echo "Committers:"
+cat $combined_log | awk -F\| {'print  $2'} | sort | uniq
+echo "======================"
 
-# cleanup the log
+# todo: flag for ffmpeg
+time gource $combined_log \
+    -$RESOLUTION \
+    --colour-images \
+    --file-extensions \
+    --file-filter node_modules \
+    --hide progress \
+    --highlight-users \
+    --key \
+    --stop-at-end
+
 rm $combined_log
