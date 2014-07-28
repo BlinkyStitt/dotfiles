@@ -6,7 +6,7 @@
 # <this.sh> /path/to/repo1 /path/to/repo2
 
 RESOLUTION="1280x720"
-OUTFILE="gource.webm"
+OUTFILE="gource.mkv"
 COMBINED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 SORTED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 
@@ -51,6 +51,6 @@ time gource $SORTED_LOG \
     --seconds-per-day 0.1 \
     --user-scale 3 \
     -r 60 \
-    -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libvpx -b 10000K $OUTFILE
+    -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
 
 rm $SORTED_LOG
