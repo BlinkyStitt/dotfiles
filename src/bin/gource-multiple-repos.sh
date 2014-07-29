@@ -43,7 +43,9 @@ time gource $SORTED_LOG \
     -$RESOLUTION \
     --colour-images \
     --file-idle-time 0 \
-    --hide dirnames,progress,filenames \
+    --dir-name-depth 2 \
+    --hide progress,filenames \
+    --highlight-dirs \
     --highlight-users \
     --key \
     --max-file-lag 0.1 \
