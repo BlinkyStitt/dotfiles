@@ -5,8 +5,8 @@
 # Example:
 # <this.sh> /path/to/repo1 /path/to/repo2
 
-RESOLUTION="1280x720"
-OUTFILE="gource.mkv"
+RESOLUTION="720x450"
+OUTFILE="gource.m4v"
 COMBINED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 SORTED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 
@@ -42,17 +42,16 @@ echo "======================"
 time gource $SORTED_LOG \
     -$RESOLUTION \
     --colour-images \
+    --elasticity 0.5 \
     --file-idle-time 0 \
-    --dir-name-depth 2 \
-    --hide progress,filenames \
+    --dir-name-depth 1 \
+    --hide mouse,progress,filenames \
     --highlight-dirs \
     --highlight-users \
-    --key \
-    --max-file-lag 0.1 \
     --max-files 0 \
     --seconds-per-day 0.1 \
-    --user-scale 3 \
-    -r 60 \
-    -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
+    --user-scale 2 \
+    -r 30 \
+    -o - | ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
 
 rm $SORTED_LOG
