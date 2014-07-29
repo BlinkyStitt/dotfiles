@@ -5,7 +5,7 @@
 # Example:
 # <this.sh> /path/to/repo1 /path/to/repo2
 
-RESOLUTION="720x450"
+RESOLUTION="1440x900"
 OUTFILE="gource.m4v"
 COMBINED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 SORTED_LOG="$(mktemp /tmp/gource.XXXXXX)"
@@ -39,18 +39,16 @@ cat $SORTED_LOG | awk -F\| {'print  $2'} | sort | uniq
 echo "======================"
 
 # todo: flag to make ffmpeg optional
+# todo: make it easier to customize all of these options without changing the script
 time gource $SORTED_LOG \
     -$RESOLUTION \
     --colour-images \
-    --elasticity 0.5 \
+    --elasticity 1 \
     --file-idle-time 0 \
-    --dir-name-depth 1 \
-    --hide mouse,progress,filenames \
-    --highlight-dirs \
-    --highlight-users \
+    --hide date,dirnames,mouse,progress,filenames,usernames \
+    --user-image-dir $HOME/.gource \
     --max-files 0 \
     --seconds-per-day 0.1 \
-    --user-scale 2 \
     -r 30 \
     -o - | ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
 
