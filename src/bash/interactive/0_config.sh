@@ -48,8 +48,12 @@ export HISTCONTROL=ignoredups
 # command line behave like vim
 set -o vi
 
-# vim as EDITOR
-export EDITOR=vim
+if command_exists subl; then
+    EDITOR="subl -w"
+else
+    EDITOR=vim
+fi
+export EDITOR
 
 # bash 4 options
 # todo: need to make this only run on bash 4 instead of sending to /dev/null
