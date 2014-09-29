@@ -82,10 +82,6 @@ if command_exists f90cache; then
     fi
 fi
 
-if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
-    PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
-fi
-
 # nvm
 if [ -r "${HOME}/.nvm/nvm.sh" ]; then
   source "${HOME}/.nvm/nvm.sh"
