@@ -1,12 +1,12 @@
 # pip
-export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
+#export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 
 # virtualenv
 export VIRTUALENV_USE_DISTRIBUTE=1
 
 # when you open tmux (or screen), you need to reload the virtual env
 if [ "$VIRTUAL_ENV" ]; then
-    source $VIRTUAL_ENV/bin/activate
+    . $VIRTUAL_ENV/bin/activate
 fi
 
 # find virtualenvwrapper.sh anywhere on your path
@@ -15,6 +15,6 @@ if command_exists virtualenvwrapper.sh; then
     if command_exists pyenv; then
         pyenv virtualenvwrapper
     else
-        source `which virtualenvwrapper.sh`
+        . `which virtualenvwrapper.sh`
     fi
 fi
