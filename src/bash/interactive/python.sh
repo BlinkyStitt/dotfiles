@@ -1,9 +1,6 @@
 # pip
 #export PIP_DOWNLOAD_CACHE="${HOME}/.pip/cache"
 
-# virtualenv
-export VIRTUALENV_USE_DISTRIBUTE=1
-
 # when you open tmux (or screen), you need to reload the virtual env
 if [ "$VIRTUAL_ENV" ]; then
     . $VIRTUAL_ENV/bin/activate
