@@ -1,7 +1,9 @@
 #!/bin/bash
 # usage: ez_dd source dest [bs=8m]
 
-if shell_is_osx; then
+set -e
+
+if [ $SHELL_PLATFORM = "OSX" ]; then
     INPUT_SIZE=$(du -sk ${1} | awk '{print $1*1024}')
 else
     INPUT_SIZE=$(du -sb ${1} | awk '{print $1}')
