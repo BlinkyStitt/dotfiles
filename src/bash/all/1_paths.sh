@@ -15,6 +15,30 @@ else
   PYTHONPATH="${ORIG_PYTHONPATH}"
 fi
 
+# ccache
+if command_exists ccache; then
+    if command_exists brew; then
+        CCACHE_LIBEXEC=`brew --prefix ccache`/libexec
+        if [ -d "${CCACHE_LIBEXEC}" ]; then
+            PATH="${CCACHE_LIBEXEC}:${PATH}"
+        fi
+    elif [ -d "/usr/lib/ccache" ]; then
+        PATH="/usr/lib/ccache:${PATH}"
+    fi
+fi
+
+# f90cache
+if command_exists f90cache; then
+    if command_exists brew; then
+        F90CACHE_LIBEXEC=`brew --prefix f90cache`/libexec
+        if [ -d "${F90CACHE_LIBEXEC}" ]; then
+            PATH="${F90CACHE_LIBEXEC}:${PATH}"
+        fi
+    elif [ -d "/usr/lib/f90cache" ]; then
+        PATH="/usr/lib/f90cache:${PATH}"
+    fi
+fi
+
 # git-annex
 if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
     PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
@@ -43,6 +67,14 @@ if [ -n "$BREW_ROOT" ]; then
   fi
 fi
 
+# homedir bin
+if [ -d "${HOME}/.bin" ]; then
+  PATH="$PATH:${HOME}/.bin"
+fi
+if [ -d "${HOME}/bin" ]; then
+  PATH="$PATH:${HOME}/bin"
+fi
+
 # nvm
 if [ -r "${HOME}/.nvm/nvm.sh" ]; then
   source "${HOME}/.nvm/nvm.sh"
@@ -56,48 +88,6 @@ fi
 # rvm
 if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
   source "${HOME}/.rvm/scripts/rvm"
-fi
-
-# ccache
-if command_exists ccache; then
-    if command_exists brew; then
-        CCACHE_LIBEXEC=`brew --prefix ccache`/libexec
-        if [ -d "${CCACHE_LIBEXEC}" ]; then
-            PATH="${CCACHE_LIBEXEC}:${PATH}"
-        fi
-    elif [ -d "/usr/lib/ccache" ]; then
-        PATH="/usr/lib/ccache:${PATH}"
-    fi
-fi
-
-# f90cache
-if command_exists f90cache; then
-    if command_exists brew; then
-        F90CACHE_LIBEXEC=`brew --prefix f90cache`/libexec
-        if [ -d "${F90CACHE_LIBEXEC}" ]; then
-            PATH="${F90CACHE_LIBEXEC}:${PATH}"
-        fi
-    elif [ -d "/usr/lib/f90cache" ]; then
-        PATH="/usr/lib/f90cache:${PATH}"
-    fi
-fi
-
-# nvm
-if [ -r "${HOME}/.nvm/nvm.sh" ]; then
-  source "${HOME}/.nvm/nvm.sh"
-fi
-
-# pyenv
-if command_exists pyenv; then
-  eval "$(pyenv init -)"
-fi
-
-# add the user's bin folders to the path
-if [ -d "${HOME}/.bin" ]; then
-  PATH="${HOME}/.bin:$PATH"
-fi
-if [ -d "${HOME}/bin" ]; then
-  PATH="${HOME}/bin:$PATH"
 fi
 
 # local settings
