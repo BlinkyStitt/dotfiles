@@ -1,0 +1,2 @@
+#!/bin/sh
+exec devpi upload --formats=bdist_wheel,sdist --with-docs
