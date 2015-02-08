@@ -15,7 +15,6 @@ echo "Committers:"
 cat $INFILE | awk -F\| {'print  $2'} | sort | uniq
 echo "======================"
 
-# todo: flag to make ffmpeg optional
 # todo: make it easier to customize all of these options without changing the script
 time gource $INFILE \
     -$RESOLUTION \
@@ -24,8 +23,6 @@ time gource $INFILE \
     --file-idle-time 0 \
     --user-image-dir $HOME/.gource \
     --max-files 0 \
-    --seconds-per-day 0.1 \
+    --seconds-per-day 1 \
     --dir-name-depth 1 \
     -r 30 $@
-
-#     --elasticity 1 \

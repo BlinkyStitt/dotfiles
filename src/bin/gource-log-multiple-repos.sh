@@ -20,7 +20,7 @@ output_custom_log () {
         local clean_repo=${repo%.git}
         local clean_repo=${clean_repo%\/}
         # todo: make this optional?
-        local clean_repo=$(basename $clean_repo)
+        local clean_repo="git/$(basename $clean_repo)"
         sed -E "s#(.+)\|#\1|${clean_repo}#" $repo_logfile >> $log
     else
         >&2 echo "Failed processing $repo..."

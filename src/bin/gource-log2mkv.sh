@@ -5,14 +5,16 @@
 # Example:
 # <this.sh> logfile
 
+set -e
+
 # allow stdin
 INFILE=$1
 
 # todo: allow this to be a parameter
-OUTFILE="${INFILE%.*}.m4v"
+OUTFILE=$2
 
 # todo: allow args to gource and to ffmpeg
-gource-log2gource.sh \
-    --hide date,dirnames,mouse,progress,filenames,usernames \
-    $@ -o - | \
+gource-log2gource.sh $INFILE \
+    --hide bloom,date,dirnames,mouse,progress,root,filenames,usernames \
+    -o - | \
     ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
