@@ -25,7 +25,7 @@ time gource $INFILE \
     --user-image-dir $HOME/.gource \
     --max-files 0 \
     --seconds-per-day 0.1 \
-    --dir-name-depth 2 \
+    --dir-name-depth 1 \
     -r 30 $@
 
 #     --elasticity 1 \

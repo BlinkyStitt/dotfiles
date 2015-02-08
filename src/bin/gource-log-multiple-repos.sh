@@ -16,10 +16,11 @@ output_custom_log () {
     gource --output-custom-log $repo_logfile $repo && EXIT_CODE=0 || EXIT_CODE=$?
     if [ $EXIT_CODE -eq 0 ]; then
         # add an extra parent directory to the path of the files in each project
-        local clean_repo=$(basename $repo)
         # remove the .git or /.git from the end if it is there
-        local clean_repo=${clean_repo%.git}
+        local clean_repo=${repo%.git}
         local clean_repo=${clean_repo%\/}
+        # todo: make this optional?
+        local clean_repo=$(basename $clean_repo)
         sed -E "s#(.+)\|#\1|${clean_repo}#" $repo_logfile >> $log
     else
         >&2 echo "Failed processing $repo..."
