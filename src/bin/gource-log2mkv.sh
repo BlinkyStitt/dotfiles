@@ -3,9 +3,10 @@
 # Pass the repositories in command line arguments.
 # based on https://gist.github.com/derEremit/1347949
 # Example:
-# <this.sh> logfile
+# <this.sh> logfile outfile.m4v
 
 set -e
+set -o pipefail
 
 # allow stdin
 INFILE=$1
@@ -14,7 +15,5 @@ INFILE=$1
 OUTFILE=$2
 
 # todo: allow args to gource and to ffmpeg
-gource-log2gource.sh $INFILE \
-    --hide bloom,date,dirnames,mouse,progress,root,filenames,usernames \
-    -o - | \
+gource-log2gource.sh $INFILE -o - | \
     ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE

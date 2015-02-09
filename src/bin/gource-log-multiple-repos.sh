@@ -20,7 +20,7 @@ output_custom_log () {
         local clean_repo=${repo%.git}
         local clean_repo=${clean_repo%\/}
         # todo: make this optional?
-        local clean_repo="git/$(basename $clean_repo)"
+        local clean_repo="g/$(basename $clean_repo)"
         sed -E "s#(.+)\|#\1|${clean_repo}#" $repo_logfile >> $log
     else
         >&2 echo "Failed processing $repo..."
@@ -30,9 +30,10 @@ output_custom_log () {
 # create a log file sorted by repo
 COMBINED_LOG="$(mktemp /tmp/gource.XXXXXX)"
 for root_dir in $@; do
-    for bare_repo in $(find "$root_dir" -name *.git -type d -prune); do
-        output_custom_log $COMBINED_LOG $bare_repo
-    done
+    # todo: gource doesn't seem to support bare repos
+    # for bare_repo in $(find "$root_dir" -name *.git -type d -prune); do
+    #    output_custom_log $COMBINED_LOG $bare_repo
+    # done
     for cloned_repo in $(find "$root_dir" -name .git -type d -prune); do
         # pass repo of repo/.git
         output_custom_log $COMBINED_LOG $(dirname $cloned_repo)
