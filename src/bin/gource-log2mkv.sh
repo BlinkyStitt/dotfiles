@@ -16,4 +16,4 @@ OUTFILE=$2
 
 # todo: allow args to gource and to ffmpeg
 gource-log2gource.sh $INFILE -o - | \
-    ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 $OUTFILE
+    ffmpeg -f image2pipe -vcodec ppm -i - -codec:v libx264 -movflags faststart -vf scale=-1:720,format=yuv420p $OUTFILE

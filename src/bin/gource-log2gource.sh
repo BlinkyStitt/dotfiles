@@ -8,7 +8,7 @@
 INFILE=$1
 
 # todo: use $(system_profiler SPDisplaysDataType |grep Resolution)
-RESOLUTION="1440x900"
+# RESOLUTION="1440x900"
 
 echo "======================"
 echo "Committers:"
@@ -17,12 +17,10 @@ echo "======================"
 
 # todo: make it easier to customize all of these options without changing the script
 time gource $INFILE \
-    -$RESOLUTION \
     --hide bloom,filenames,root \
     --colour-images \
     --file-idle-time 0 \
     --user-image-dir $HOME/.gource \
     --max-files 0 \
     --seconds-per-day 1 \
-    --dir-name-depth 1 \
-    -r 30 $@
+    --dir-name-depth 1 $@
