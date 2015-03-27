@@ -2,18 +2,20 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
     # cd into the code directory
     # todo: make this work deeper than one level
     c() {
-        if [ -z $1 ]; then
-            cd ${CODE_HOME}
+        local d=${1%@}
+
+        if [ -z $d ]; then
+            cd "${CODE_HOME}"
             return
         fi
 
-        if [ ! -d ${CODE_HOME}/$1 ]; then
+        if [ ! -d "${CODE_HOME}/${d}" ]; then
             echo "$1: No such project"
             return
         fi
 
-        cd ${CODE_HOME}/$1
-        echo "cd `pwd`"
+        cd "${CODE_HOME}/${d}"
+        echo "cd $(pwd)"
     }
     _c() {
         COMPREPLY=($(compgen -W '$(ls ${CODE_HOME}/)' -- ${COMP_WORDS[COMP_CWORD]}))
