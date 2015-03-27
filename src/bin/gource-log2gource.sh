@@ -10,14 +10,15 @@ INFILE=$1
 # todo: use $(system_profiler SPDisplaysDataType |grep Resolution)
 # RESOLUTION="1440x900"
 
-echo "======================"
-echo "Committers:"
-cat $INFILE | awk -F\| {'print  $2'} | sort | uniq
-echo "======================"
+#echo "======================"
+#echo "Committers:"
+#cat $INFILE | awk -F\| {'print  $2'} | sort | uniq
+#echo "======================"
 
 # todo: make it easier to customize all of these options without changing the script
 time gource $INFILE \
-    --hide bloom,filenames,root \
+    --camera-mode track \
+    --hide bloom,dirnames,filenames,root \
     --colour-images \
     --file-idle-time 0 \
     --user-image-dir $HOME/.gource \
