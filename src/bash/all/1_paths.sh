@@ -88,6 +88,8 @@ fi
 # rvm
 if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
   source "${HOME}/.rvm/scripts/rvm"
+elif [ -d "$HOME/.gem/ruby/2.0.0/bin" ]; then
+  PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
 fi
 
 # local settings
