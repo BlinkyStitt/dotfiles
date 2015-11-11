@@ -7,7 +7,7 @@ if shell_is_interactive; then
 
     if command_exists fortune; then
         if command_exists cowsay; then
-            fortune -s | cowsay -W 76
+            fortune -s | cowsay -s -W 76
         else
             fortune -s
         fi
