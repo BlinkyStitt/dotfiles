@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Install my dotfiles."""
 import os
 import shutil
 import subprocess
@@ -47,7 +48,12 @@ if not os.path.exists(os.path.join(home, '.gitconfig')):
 
 # running this command multiple times duplicates the config line
 try:
-    current_templatedir = subprocess.check_output(['git', 'config', '--global', 'init.templatedir'])
+    current_templatedir = subprocess.check_output([
+        'git',
+        'config',
+        '--global',
+        'init.templatedir',
+    ])
 except subprocess.CalledProcessError:
     current_templatedir = ''
 if "~/.git_template\n" not in current_templatedir:
@@ -69,7 +75,6 @@ git_commands += [
     # these commands are safe to run every time
     ['git', 'config', '--global', 'color.ui', 'auto'],
     ['git', 'config', '--global', 'rerere.enabled', 'true'],
-    ['git', 'config', '--global', 'url.ssh://git@github.com/.insteadOf', 'https://github.com/'],  # always use ssh key auth with github
     # keep --list last
     ['git', 'config', '--global', '--list'],
 ]
