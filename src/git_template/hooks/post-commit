@@ -25,7 +25,7 @@ picture_name = "{commit_date}_{repo_name}_{commit_hash}.jpeg".format(
     commit_hash=commit_hash,
 )
 
-print "Say Cheese!"
+print("Say Cheese!")
 
 picture_filepath = os.path.join(picture_dir, picture_name)
 
