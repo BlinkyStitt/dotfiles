@@ -80,18 +80,6 @@ if [ -r "${HOME}/.nvm/nvm.sh" ]; then
   source "${HOME}/.nvm/nvm.sh"
 fi
 
-# pyenv
-if command_exists pyenv; then
-  eval "$(pyenv init -)"
-fi
-
-# rvm
-if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
-  source "${HOME}/.rvm/scripts/rvm"
-elif [ -d "$HOME/.gem/ruby/2.0.0/bin" ]; then
-  PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
-fi
-
 # local settings
 # load this now so that the rest of the scripts have access to the complete PATH
 if [ -r "${HOME}/.path.local" ]; then
