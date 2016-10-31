@@ -1,0 +1,2 @@
+#!/bin/sh
+exec docker run --rm -it bwstitt/textteaser
