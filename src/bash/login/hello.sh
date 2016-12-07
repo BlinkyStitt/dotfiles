@@ -9,6 +9,6 @@ if shell_is_interactive; then
     else
         cmd=tee
     fi
-    echo "Don't forget to update your dotfiles! 'cd ~/.dotfiles; git pull'" | $cmd
+    echo "Don't forget to update! 'cd ~/.dotfiles && git pull'" | $cmd
     echo -e "${COLOR_NC}"
 fi
