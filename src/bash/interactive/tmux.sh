@@ -10,8 +10,8 @@ if command_exists tmuxinator; then
 fi
 
 # fix ssh agent inside tmux
-if [ -n "$SSH_AUTH_SOCK" ]; then
-    AUTH_SOCK_LINK="${HOME}/.ssh/auth_sock"
+AUTH_SOCK_LINK="${HOME}/.ssh/auth_sock"
+if [ -n "$SSH_AUTH_SOCK" ] && [ "$SSH_AUTH_SOCK" != "$AUTH_SOCK_LINK" ]; then
     [[ -h $AUTH_SOCK_LINK && -z $TMUX && ! "$SSH_CLIENT" =~ "127.0.0.1" ]] && unlink $AUTH_SOCK_LINK
     [[ -z $TMUX && ! "$SSH_CLIENT" =~ "127.0.0.1" ]] && ln -s $SSH_AUTH_SOCK $AUTH_SOCK_LINK
     export SSH_AUTH_SOCK=$AUTH_SOCK_LINK
