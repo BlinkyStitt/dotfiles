@@ -3,6 +3,8 @@
 
 set -e
 
+diskutil unmountDisk "$2"
+
 if [ $SHELL_PLATFORM = "OSX" ]; then
     INPUT_SIZE=$(du -sk "$1" | awk '{print $1*1024}')
 else
@@ -21,3 +23,4 @@ set -e
 sudo echo "dd if=$1 of=$2 bs=$BLOCK_SIZE"
 cat "$1" | pv -brtp -s $INPUT_SIZE | sudo dd of="$2" bs=$BLOCK_SIZE
 
+diskutil eject "$2"
