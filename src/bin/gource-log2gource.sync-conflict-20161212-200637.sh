@@ -6,10 +6,9 @@
 # <this.sh> logfile
 
 INFILE=$1
-shift
 
-# todo: allow customizing this
-RESOLUTION="1280x720"
+# todo: use $(system_profiler SPDisplaysDataType |grep Resolution)
+# RESOLUTION="1440x900"
 
 #echo "======================"
 #echo "Committers:"
@@ -18,7 +17,6 @@ RESOLUTION="1280x720"
 
 # todo: make it easier to customize all of these options without changing the script
 time gource $INFILE \
-    -${RESOLUTION} \
     --camera-mode track \
     --colour-images \
     --dir-name-depth 1 \

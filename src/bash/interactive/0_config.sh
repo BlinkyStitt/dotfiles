@@ -18,9 +18,6 @@ export COLOR_GRAY='\033[1;30m'
 export COLOR_LIGHT_GRAY='\033[0;37m'
 alias colorslist="set | egrep '^COLOR_\w*'"
 
-# grep color options
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-
 # ls color options
 export CLICOLOR=1
 # a  black
@@ -60,7 +57,4 @@ if [ -d "$HOME/code" ]; then
 fi
 if [ -d "$HOME/stitthappens" ]; then
     export STITTHAPPENS_HOME="$HOME/stitthappens"
-fi
-if [ -d "$HOME/Uber" ]; then
-    export UBER_HOME="$HOME/Uber"
 fi

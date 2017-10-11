@@ -27,21 +27,12 @@ if command_exists ccache; then
     fi
 fi
 
-# f90cache
-if command_exists f90cache; then
-    if command_exists brew; then
-        F90CACHE_LIBEXEC=`brew --prefix f90cache`/libexec
-        if [ -d "${F90CACHE_LIBEXEC}" ]; then
-            PATH="${F90CACHE_LIBEXEC}:${PATH}"
-        fi
-    elif [ -d "/usr/lib/f90cache" ]; then
-        PATH="/usr/lib/f90cache:${PATH}"
-    fi
+# homedir bin
+if [ -d "${HOME}/.bin" ]; then
+  PATH="$PATH:${HOME}/.bin"
 fi
-
-# git-annex
-if [ -d "/Applications/git-annex.app/Contents/MacOS" ]; then
-    PATH="$PATH:/Applications/git-annex.app/Contents/MacOS"
+if [ -d "${HOME}/bin" ]; then
+  PATH="$PATH:${HOME}/bin"
 fi
 
 # homebrew
@@ -67,15 +58,12 @@ if [ -n "$BREW_ROOT" ]; then
   fi
 fi
 
-# homedir bin
-if [ -d "${HOME}/.bin" ]; then
-  PATH="$PATH:${HOME}/.bin"
-fi
-if [ -d "${HOME}/bin" ]; then
-  PATH="$PATH:${HOME}/bin"
+# rust
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
-# nvm
+# nodejs
 if [ -r "${HOME}/.nvm/nvm.sh" ]; then
   source "${HOME}/.nvm/nvm.sh"
 fi

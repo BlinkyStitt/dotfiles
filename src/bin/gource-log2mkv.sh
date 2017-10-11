@@ -1,19 +1,30 @@
 #!/usr/bin/env bash
-# Generates gource video (h.264) out of multiple repositories.
-# Pass the repositories in command line arguments.
-# based on https://gist.github.com/derEremit/1347949
+# Generates an mp4 out of gource logs.
+# based on https://github.com/acaudwell/Gource/wiki/Videos#ffmpeg-using-x264-codec
 # Example:
-# <this.sh> logfile outfile.m4v
+# <this.sh> logfile outfile.mp4
 
 set -e
 set -o pipefail
 
-# allow stdin
+# allow stdin?
 INFILE=$1
 
-# todo: allow this to be a parameter
+# todo: make sure this ends in .mp4
 OUTFILE=$2
 
 # todo: allow args to gource and to ffmpeg
-gource-log2gource.sh $INFILE -o - | \
-    ffmpeg -f image2pipe -vcodec ppm -i - -codec:v libx264 -movflags faststart -vf scale=-1:720,format=yuv420p -r 30 $OUTFILE
+gource-log2gource.sh $INFILE -o - | ffmpeg \
+    -y \
+    -r 30 \
+    -f image2pipe \
+    -vcodec ppm \
+    -i - \
+    -vcodec libx264 \
+    -movflags faststart \
+    -preset ultrafast \
+    -pix_fmt yuv420p \
+    -crf 1 \
+    -threads 0 \
+    -bf 0 \
+    $OUTFILE

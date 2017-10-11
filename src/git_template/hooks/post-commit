@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-import distutils
+#!/usr/bin/env python3
+"""Take a picture on git commit."""
 import os
 import subprocess
 
@@ -10,7 +10,9 @@ picture_dir = os.path.expanduser(os.path.join('~', 'Pictures', 'gitshots'))
 if not os.path.exists(picture_dir):
     os.makedirs(picture_dir)
 
+
 def git(*args):
+    """Subprocess helper for running git."""
     return subprocess.check_output(['git'] + list(args))
 
 
@@ -30,9 +32,10 @@ print("Say Cheese!")
 picture_filepath = os.path.join(picture_dir, picture_name)
 
 try:
+    # TODO: put a timer on this. sometimes this hangs forever
     subprocess.check_call(['imagesnap', '-q', picture_filepath])
 except OSError:
-    print "imagesnap is not installed."
+    print("imagesnap is not installed.")
 
-print "gitshot saved to {}".format(picture_filepath)
-print ""
+print("gitshot saved to {}".format(picture_filepath))
+print("")
