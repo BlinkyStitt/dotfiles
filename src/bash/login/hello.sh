@@ -5,8 +5,8 @@ if shell_is_interactive; then
     echo -ne "Server time is: "; date
 
 
-    if command_exists zfs; then
-        zfs status -v
+    if command_exists zpool; then
+        zpool status -v
     fi
 
     if command_exists cowsay; then
