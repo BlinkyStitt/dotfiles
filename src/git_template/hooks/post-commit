@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 """Take a picture on git commit."""
 import os
 import subprocess
