@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # save some variables so we can safely reload without duplicating anything
 if [ -z "${ORIG_PATH}" ]; then
   export ORIG_PATH=${PATH}
@@ -66,6 +68,11 @@ fi
 # nodejs
 if [ -r "${HOME}/.nvm/nvm.sh" ]; then
   source "${HOME}/.nvm/nvm.sh"
+fi
+
+# https://github.com/MestreLion/git-tools.git
+if [ -d "${HOME}/.git-tools" ]; then
+  export PATH="$PATH:$HOME/.git-tools"
 fi
 
 # local settings

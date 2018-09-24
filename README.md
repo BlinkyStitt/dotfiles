@@ -13,6 +13,7 @@ Installing
 ----------
 
 ```
+git clone https://github.com/MestreLion/git-tools.git ~/.git-tools
 git clone git://github.com/nojhan/liquidprompt.git ~/.liquidprompt
 git clone git://github.com/WyseNynja/dotfiles.git ~/.dotfiles
 ~/.dotfiles/install
