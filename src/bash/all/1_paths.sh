@@ -20,7 +20,7 @@ fi
 # ccache
 if command_exists ccache; then
     if command_exists brew; then
-        CCACHE_LIBEXEC=`brew --prefix ccache`/libexec
+        CCACHE_LIBEXEC=$(brew --prefix ccache)/libexec
         if [ -d "${CCACHE_LIBEXEC}" ]; then
             PATH="${CCACHE_LIBEXEC}:${PATH}"
         fi
@@ -37,37 +37,9 @@ if [ -d "${HOME}/bin" ]; then
   PATH="$PATH:${HOME}/bin"
 fi
 
-# homebrew
-if command_exists brew; then
-  # if brew is already on the path. get that prefix so we can move it to the front
-  BREW_ROOT=`brew --prefix`
-elif [ -d "$HOME/.homebrew" ]; then
-  # no brew on the path, so check the user folder
-  # it is probably better to symlink brew into /usr/local/bin from here than to install here
-  BREW_ROOT="$HOME/.homebrew"
-fi
-if [ -n "$BREW_ROOT" ]; then
-  # generally I use nvm, but support brew-installed node
-  if [ -d "${BREW_ROOT}/lib/node_modules" ]; then
-    export NODE_PATH="${BREW_PATH}/lib/node_modules"
-  fi
-  if [ -d "${BREW_ROOT}/sbin" ]; then
-    PATH="${BREW_ROOT}/sbin:${PATH}"
-  fi
-  if [ -d "${BREW_ROOT}/bin" ]; then
-    # eventhough this is already on the path, we need to make it higher priority
-    PATH="${BREW_ROOT}/bin:${PATH}"
-  fi
-fi
-
 # rust
 if [ -d "$HOME/.cargo/bin" ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
-fi
-
-# nodejs
-if [ -r "${HOME}/.nvm/nvm.sh" ]; then
-  source "${HOME}/.nvm/nvm.sh"
 fi
 
 # https://github.com/MestreLion/git-tools.git

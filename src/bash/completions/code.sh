@@ -1,11 +1,13 @@
+#!/usr/bin/env bash
+
 if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
     # cd into the code directory
     # todo: make this work deeper than one level
     c() {
         local d=${1%@}
 
-        if [ -z $d ]; then
-            cd "${CODE_HOME}"
+        if [ -z "$d" ]; then
+            cd "${CODE_HOME}" || exit 1
             return
         fi
 
@@ -14,7 +16,7 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
             return
         fi
 
-        cd "${CODE_HOME}/${d}"
+        cd "${CODE_HOME}/${d}" || exit 1
         echo "cd $(pwd)"
     }
     _c() {

@@ -1,4 +1,4 @@
-# pip
+#!/usr/bin/env bash
 
 if command_exists pyenv; then
     eval "$(pyenv init -)"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # if [[ -e "$HOME/.gnupg/.override-ssh-agent" ]]; then
 #     envfile="$HOME/.gnupg/gpg-agent.env"
 #     if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if shell_is_interactive; then
     # Hello Messsage --------------------------------------------------
     echo -e "${COLOR_BROWN}Kernel Information: " `uname -smr`

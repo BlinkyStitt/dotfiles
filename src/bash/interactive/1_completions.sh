@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # run completions last since they may need config variables
 
 for i in ~/.bash/completions/*.sh ; do

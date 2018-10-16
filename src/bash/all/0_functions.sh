@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # this loads first so that these are available elsewhere
 
 # utility function to check if a command exists on the PATH
@@ -14,7 +15,7 @@ command_exists() { type "$1" &> /dev/null; }
 ssh-reagent () {
     for agent in $SSH_AUTH_SOCK $STATIC_SSH_AUTH_SOCK /tmp/ssh-*/agent.*; do
         export SSH_AUTH_SOCK=$agent
-        if ssh-add -l 2>&1 > /dev/null; then
+        if ssh-add -l >/dev/null 2>&1; then
             echo "Found working SSH Agent: ${SSH_AUTH_SOCK}"
             ssh-add -l
             return
