@@ -37,5 +37,5 @@ try:
 except OSError:
     print("imagesnap is not installed.")
 
-print("gitshot saved to {}".format(picture_filepath))
+print(("gitshot saved to {}".format(picture_filepath)))
 print("")
