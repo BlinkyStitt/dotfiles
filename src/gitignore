@@ -6,3 +6,4 @@
 .*.swp
 .com.apple.backupd.*
 .unison.*.unison.tmp
+.vscode/
