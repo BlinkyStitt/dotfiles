@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -eux
+
+cd ~/.dotfiles
+git pull
+
+cd ~/.liquidprompt
+git pull
+
