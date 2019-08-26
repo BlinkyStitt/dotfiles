@@ -2,9 +2,9 @@
 
 set -eux
 
-cd ~/.dotfiles
+cd ~/.liquidprompt
 git pull
 
-cd ~/.liquidprompt
+cd ~/.dotfiles
 git pull
 
