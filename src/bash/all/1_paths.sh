@@ -29,6 +29,12 @@ if command_exists ccache; then
     fi
 fi
 
+# homebrew
+if command_exists brew; then
+  # TODO: /usr/local/bin is already on the front of the path from something
+  PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+fi
+
 # homedir bin
 if [ -d "${HOME}/.bin" ]; then
   PATH="$PATH:${HOME}/.bin"

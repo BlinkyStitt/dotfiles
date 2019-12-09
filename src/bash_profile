@@ -1,2 +1,4 @@
 source "$HOME/.bashrc"
-export HOMEBREW_NO_SANDBOX=1
+
+# TODO: why did I have this?
+# export HOMEBREW_NO_SANDBOX=1
