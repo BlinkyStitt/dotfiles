@@ -68,7 +68,7 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
                 return
             fi
 
-            cd "${CODE_HOME}/${d}" || exit 1
+            cd "${CODE_HOME}/ski/${d}" || exit 1
             echo "cd $(pwd)"
         }
         _ski() {
