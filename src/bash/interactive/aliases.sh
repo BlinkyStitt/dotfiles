@@ -12,13 +12,10 @@ if shell_is_osx; then
 
     alias ls='ls -hF'
 elif shell_is_linux; then
-    alias ls='ls -hF --color'
+    alias ls='ls -hF --color=auto'
 fi
 
 # mkdir and cd there
 mkcd() { [ -n "$1" ] && mkdir -p "$@" && cd "$1"; }
-
-alias cinfo="ssh mgmt01-peak1.prod.uber.com clusto info"
-alias clp="ssh mgmt01-peak1.prod.uber.com clusto list-pool --recursive"
 
 alias bs8='flake8 --max-line-length=300'
