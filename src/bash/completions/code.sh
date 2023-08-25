@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# i'm sure this could be better. but this is a quick way to get into my code directories with simple tab completion
 
 if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
     # cd into the code directory
@@ -26,6 +25,7 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
     }
 
     complete -o default -o nospace -F _c c
+<<<<<<< HEAD
 
     if [[ -d "${CODE_HOME}/satoshi_and_kin" ]]; then
         # cd into the code/satoshi_and_kin directory
@@ -78,4 +78,6 @@ if [[ -n ${CODE_HOME} && -d ${CODE_HOME} ]]; then
 
         complete -o default -o nospace -F _ski ski
     fi
+=======
+>>>>>>> parent of e068b24... ski helper
 fi
